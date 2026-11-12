@@ -1,0 +1,38 @@
+[
+  {
+    "id": "travel-1",
+    "place": "[PLACEHOLDER]",
+    "country": "[PLACEHOLDER]",
+    "food": "[PLACEHOLDER]",
+    "memory": "[PLACEHOLDER]",
+    "photos": ["[PLACEHOLDER]", "[PLACEHOLDER]"],
+    "coordinates": [0, 0]
+  },
+  {
+    "id": "travel-2",
+    "place": "[PLACEHOLDER]",
+    "country": "[PLACEHOLDER]",
+    "food": "[PLACEHOLDER]",
+    "memory": "[PLACEHOLDER]",
+    "photos": ["[PLACEHOLDER]", "[PLACEHOLDER]"],
+    "coordinates": [0, 0]
+  },
+  {
+    "id": "travel-3",
+    "place": "[PLACEHOLDER]",
+    "country": "[PLACEHOLDER]",
+    "food": "[PLACEHOLDER]",
+    "memory": "[PLACEHOLDER]",
+    "photos": ["[PLACEHOLDER]", "[PLACEHOLDER]"],
+    "coordinates": [0, 0]
+  },
+  {
+    "id": "travel-4",
+    "place": "[PLACEHOLDER]",
+    "country": "[PLACEHOLDER]",
+    "food": "[PLACEHOLDER]",
+    "memory": "[PLACEHOLDER]",
+    "photos": ["[PLACEHOLDER]", "[PLACEHOLDER]"],
+    "coordinates": [0, 0]
+  }
+]

@@ -1,0 +1,20 @@
+:root {
+  --personal-bg: #f7f3ea;
+  --personal-sky: #a7d8ef;
+  --personal-sky-deep: #86c7f3;
+  --personal-mountain: #89a8bc;
+  --personal-mountain-shadow: #6f8ea5;
+  --personal-terrace: #d9b07a;
+  --personal-table: #8a5a3c;
+  --personal-table-light: #b98b5a;
+  --personal-egg: #ffec9d;
+  --personal-egg-yolk: #f6b93b;
+  --personal-plate: #f4efe5;
+  --personal-chip: #f5e8d2;
+  --personal-text: #3d2c28;
+  --personal-muted: #6d584f;
+  --personal-accent: #df8d4d;
+  --personal-glow: rgba(255, 184, 86, 0.35);
+  --personal-font-heading: 'Trebuchet MS', 'Segoe UI', sans-serif;
+  --personal-font-body: 'Segoe UI', 'Helvetica Neue', sans-serif;
+}

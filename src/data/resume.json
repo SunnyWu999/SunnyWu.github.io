@@ -1,0 +1,34 @@
+{
+  "id": "resume-1",
+  "title": "[PLACEHOLDER]",
+  "courses": [
+    {
+      "id": "course-1",
+      "title": "[PLACEHOLDER]",
+      "date": "[PLACEHOLDER]",
+      "description": "[PLACEHOLDER]",
+      "details": ["[PLACEHOLDER]", "[PLACEHOLDER]", "[PLACEHOLDER]"]
+    },
+    {
+      "id": "course-2",
+      "title": "[PLACEHOLDER]",
+      "date": "[PLACEHOLDER]",
+      "description": "[PLACEHOLDER]",
+      "details": ["[PLACEHOLDER]", "[PLACEHOLDER]", "[PLACEHOLDER]"]
+    },
+    {
+      "id": "course-3",
+      "title": "[PLACEHOLDER]",
+      "date": "[PLACEHOLDER]",
+      "description": "[PLACEHOLDER]",
+      "details": ["[PLACEHOLDER]", "[PLACEHOLDER]", "[PLACEHOLDER]"]
+    },
+    {
+      "id": "course-4",
+      "title": "[PLACEHOLDER]",
+      "date": "[PLACEHOLDER]",
+      "description": "[PLACEHOLDER]",
+      "details": ["[PLACEHOLDER]", "[PLACEHOLDER]", "[PLACEHOLDER]"]
+    }
+  ]
+}

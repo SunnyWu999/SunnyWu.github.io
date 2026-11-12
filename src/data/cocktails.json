@@ -1,0 +1,42 @@
+[
+  {
+    "id": "cocktail-1",
+    "name": "[PLACEHOLDER]",
+    "date": "[PLACEHOLDER]",
+    "location": "[PLACEHOLDER]",
+    "ingredients": ["[PLACEHOLDER]", "[PLACEHOLDER]", "[PLACEHOLDER]"],
+    "proof": 82,
+    "story": "[PLACEHOLDER]",
+    "images": ["[PLACEHOLDER]", "[PLACEHOLDER]"]
+  },
+  {
+    "id": "cocktail-2",
+    "name": "[PLACEHOLDER]",
+    "date": "[PLACEHOLDER]",
+    "location": "[PLACEHOLDER]",
+    "ingredients": ["[PLACEHOLDER]", "[PLACEHOLDER]", "[PLACEHOLDER]"],
+    "proof": 64,
+    "story": "[PLACEHOLDER]",
+    "images": ["[PLACEHOLDER]", "[PLACEHOLDER]"]
+  },
+  {
+    "id": "cocktail-3",
+    "name": "[PLACEHOLDER]",
+    "date": "[PLACEHOLDER]",
+    "location": "[PLACEHOLDER]",
+    "ingredients": ["[PLACEHOLDER]", "[PLACEHOLDER]", "[PLACEHOLDER]"],
+    "proof": 91,
+    "story": "[PLACEHOLDER]",
+    "images": ["[PLACEHOLDER]", "[PLACEHOLDER]"]
+  },
+  {
+    "id": "cocktail-4",
+    "name": "[PLACEHOLDER]",
+    "date": "[PLACEHOLDER]",
+    "location": "[PLACEHOLDER]",
+    "ingredients": ["[PLACEHOLDER]", "[PLACEHOLDER]", "[PLACEHOLDER]"],
+    "proof": 73,
+    "story": "[PLACEHOLDER]",
+    "images": ["[PLACEHOLDER]", "[PLACEHOLDER]"]
+  }
+]

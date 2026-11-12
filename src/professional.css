@@ -1,0 +1,17 @@
+:root {
+  --professional-bg: #f5f0ea;
+  --professional-ink: #2b211d;
+  --professional-ink-soft: #53463d;
+  --professional-table: #f7f3ef;
+  --professional-table-shadow: #d8d0c7;
+  --professional-window: #2a3c5d;
+  --professional-window-glow: #b8a38a;
+  --professional-gold: #b4894b;
+  --professional-copper: #8b6243;
+  --professional-snow: #dfe9f2;
+  --professional-plate: #f9f7f4;
+  --professional-glass: rgba(191, 219, 255, 0.5);
+  --professional-accent: #a77c52;
+  --professional-font-heading: 'Georgia', 'Times New Roman', serif;
+  --professional-font-body: 'Palatino Linotype', 'Book Antiqua', serif;
+}
