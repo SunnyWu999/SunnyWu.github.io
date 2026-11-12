@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes, BrowserRouter } from 'react-router-dom'
 import PersonalScene from './components/scene/PersonalScene'
+import ProfessionalScene from './components/scene/ProfessionalScene'
 import './personal.css'
 import './professional.css'
 
@@ -8,7 +9,7 @@ function PersonalRoute() {
 }
 
 function ProfessionalRoute() {
-  return <h1>Sunny Side Up — Professional</h1>
+  return <ProfessionalScene />
 }
 
 function App() {
