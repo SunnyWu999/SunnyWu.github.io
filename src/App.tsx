@@ -7,7 +7,16 @@ import './personal.css'
 import './professional.css'
 
 function PersonalRoute() {
-  return <PersonalScene />
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  return (
+    <PersonalScene
+      activeHash={location.hash.slice(1)}
+      onOpenDish={(dishId) => navigate({ pathname: '/', hash: `#${dishId}` })}
+      onClose={() => navigate('/')}
+    />
+  )
 }
 
 function ProfessionalRoute() {

@@ -97,16 +97,102 @@ textarea {
   color: #7a5a47;
 }
 
+.personal-scene {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(180deg, #bfe9ff 0%, #dff6ff 50%, #f8eecc 100%);
+}
+
+.dish-button {
+  position: absolute;
+  z-index: 6;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 96px;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid rgba(83, 58, 38, 0.2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.55);
+  color: #513d2a;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 12px 18px rgba(95, 64, 40, 0.08);
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.dish-button:hover,
+.dish-button:focus-visible {
+  transform: translate(-50%, -52%) scale(1.04);
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 16px 30px rgba(95, 64, 40, 0.18);
+}
+
+.dish-button:focus-visible {
+  outline: 3px solid rgba(74, 157, 220, 0.5);
+  outline-offset: 2px;
+}
+
+.section-panel__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  background: rgba(24, 20, 18, 0.45);
+}
+
+.section-panel {
+  position: relative;
+  width: min(500px, calc(100vw - 2rem));
+  padding: 2rem 2rem 1.25rem;
+  border: 1px solid rgba(66, 49, 35, 0.18);
+  border-radius: 22px;
+  background: rgba(255, 250, 245, 0.96);
+  box-shadow: 0 30px 60px rgba(49, 33, 23, 0.2);
+}
+
+.section-panel__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border: 0;
+  background: transparent;
+  color: #4d382d;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.section-panel h2 {
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  color: #413125;
+}
+
 @media (max-width: 768px) {
   .scene-toggle {
     top: 14px;
     right: 14px;
   }
+
+  .dish-button {
+    min-width: 82px;
+    font-size: 0.58rem;
+    letter-spacing: 0.05em;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .scene-toggle,
-  .scene-stage {
+  .scene-stage,
+  .dish-button,
+  .section-panel__overlay,
+  .section-panel {
     transition: none !important;
   }
 }
