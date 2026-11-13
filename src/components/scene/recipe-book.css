@@ -1,0 +1,387 @@
+/* Enchanted recipe book (night side). Builds on menu-book.css. */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&display=swap');
+
+.rb-viewport {
+  --gold: #b88a3e;
+}
+
+.rb-book {
+  filter: drop-shadow(0 0 46px rgba(255, 196, 110, 0.28)) drop-shadow(0 30px 40px rgba(5, 8, 20, 0.7));
+}
+
+/* Chapter title sits under the engraved rabbit */
+.mb-slot.rb-chapter {
+  top: 27.2%;
+  height: 14%;
+}
+
+.rb-chapter .mb-cover-title__sub {
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 1.25cqw;
+  letter-spacing: 0.22em;
+  line-height: 1.35;
+}
+
+.rb-subtitle {
+  margin: 0.3cqw 0 0;
+  font-family: 'Caveat', cursive;
+  font-size: 1.45cqw;
+  color: #8a5a2b;
+}
+
+/* Dish illustration, glowing softly between the leaf dividers */
+.rb-illustration {
+  position: absolute;
+  top: 41.5%;
+  height: 19%;
+  left: 0;
+  right: 0;
+  display: grid;
+  place-items: center;
+}
+
+.rb-illustration::before {
+  content: '';
+  position: absolute;
+  width: 55%;
+  height: 90%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 214, 140, 0.45), transparent 70%);
+  animation: rb-glow 4s ease-in-out infinite;
+}
+
+.rb-illustration img {
+  position: relative;
+  max-height: 100%;
+  max-width: 78%;
+  object-fit: contain;
+  filter: drop-shadow(0 0.4cqw 0.5cqw rgba(60, 35, 15, 0.35)) sepia(0.12);
+  animation: rb-float 6s ease-in-out infinite;
+}
+
+.rb-name {
+  font-size: 2.1cqw;
+}
+
+.rb-tag {
+  margin: 0.3cqw 0 0;
+  font-family: 'Caveat', cursive;
+  font-size: 1.4cqw;
+  color: #8e2b2b;
+}
+
+/* Recipe page */
+.rb-ingredients {
+  list-style: none;
+  margin: 0.4cqw 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.15cqw;
+}
+
+.rb-ingredients li {
+  font-style: italic;
+  font-size: 1.12cqw;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.rb-ingredients li::before {
+  content: '✦ ';
+  font-style: normal;
+  font-size: 0.75cqw;
+  color: var(--gold);
+}
+
+.rb-method {
+  margin: 0.3cqw 0 0;
+  font-size: 1.05cqw;
+  line-height: 1.38;
+  color: var(--ink-soft);
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.rb-notes {
+  margin: 0.2cqw 0 0;
+  font-family: 'Caveat', cursive;
+  font-size: 1.5cqw;
+  color: #6b3f1e;
+}
+
+/* Photos and videos: small vintage oval frames on the page */
+.rb-media {
+  margin-top: 0.5cqw;
+  display: flex;
+  gap: 0.8cqw;
+  justify-content: center;
+}
+
+.rb-media__frame {
+  position: relative;
+  width: 6.5cqw;
+  height: 5cqw;
+  padding: 0;
+  border: 0.25cqw solid var(--gold);
+  border-radius: 50%;
+  overflow: hidden;
+  background: #e9dcc2;
+  cursor: zoom-in;
+  box-shadow: 0 0.3cqw 0.6cqw rgba(60, 35, 15, 0.3), inset 0 0 0 0.12cqw rgba(255, 255, 255, 0.5);
+  transform: rotate(-3deg);
+  transition: transform 250ms ease;
+}
+
+.rb-media__frame:nth-child(2) {
+  transform: rotate(4deg);
+}
+
+.rb-media__frame:hover,
+.rb-media__frame:focus-visible {
+  transform: rotate(0) scale(1.08);
+}
+
+.rb-media__frame img,
+.rb-media__frame video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(0.25) contrast(1.05);
+}
+
+.rb-media__play {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 1.4cqw;
+  color: #fff8e8;
+  text-shadow: 0 0 0.6cqw rgba(0, 0, 0, 0.6);
+}
+
+/* Fortune cookies */
+.rb-crack {
+  padding: 0.6cqw 1.6cqw;
+  border: 0.12cqw solid var(--gold);
+  border-radius: 999px;
+  background: rgba(255, 244, 220, 0.6);
+  font-family: 'Caveat', cursive;
+  font-size: 1.6cqw;
+  color: #7a4a20;
+  cursor: pointer;
+  transition: transform 200ms ease, background 200ms ease;
+}
+
+.rb-crack:hover,
+.rb-crack:focus-visible {
+  transform: scale(1.05) rotate(-2deg);
+  background: rgba(255, 236, 190, 0.9);
+}
+
+.rb-fortune {
+  margin: 0;
+  padding: 0.8cqw 1.4cqw;
+  background: #fffdf6;
+  box-shadow: 0 0.2cqw 0.5cqw rgba(60, 35, 15, 0.25);
+  font-family: 'Caveat', cursive;
+  font-size: 1.6cqw;
+  color: #8e2b2b;
+  transform: rotate(-1.5deg);
+}
+
+/* Guest book */
+.rb-slot--form {
+  position: absolute;
+  top: 15%;
+  left: 0;
+  right: 0;
+  height: 43%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6cqw;
+}
+
+.rb-input {
+  width: 100%;
+  border: none;
+  border-bottom: 0.1cqw solid rgba(107, 84, 64, 0.5);
+  background: transparent;
+  font-family: 'Caveat', cursive;
+  font-size: 1.5cqw;
+  color: var(--ink);
+  padding: 0.2cqw 0.3cqw;
+  outline: none;
+}
+
+.rb-input:focus {
+  border-bottom-color: var(--gold);
+}
+
+.rb-input--area {
+  flex: 1;
+  min-height: 0;
+  resize: none;
+  border: 0.1cqw dashed rgba(107, 84, 64, 0.4);
+  border-radius: 0.4cqw;
+}
+
+.rb-seal {
+  margin-top: 0.2cqw;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.rb-trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+}
+
+.rb-note {
+  margin: 0 0 0.4cqw;
+  font-family: 'Caveat', cursive;
+  font-size: 1.35cqw;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.rb-note span {
+  color: var(--ink-soft);
+}
+
+/* Ribbon bookmarks on the right edge: one per dish */
+.rb-ribbons {
+  position: absolute;
+  top: 13%;
+  left: 95.5%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5cqw;
+  z-index: 2;
+}
+
+.rb-ribbon {
+  position: relative;
+  width: 7.5cqw;
+  height: 3.6cqw;
+  padding: 0 0.6cqw 0 1cqw;
+  border: none;
+  background: var(--ribbon);
+  clip-path: polygon(0 0, 100% 0, 88% 50%, 100% 100%, 0 100%);
+  color: #fbeed6;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85cqw;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: left;
+  cursor: pointer;
+  transform: translateX(-2.5cqw);
+  box-shadow: inset 0 -0.3cqw 0 rgba(0, 0, 0, 0.18);
+  transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 200ms ease;
+}
+
+.rb-ribbon:hover,
+.rb-ribbon:focus-visible {
+  transform: translateX(-0.8cqw);
+  filter: brightness(1.12);
+}
+
+.rb-ribbon.is-active {
+  transform: translateX(0);
+  filter: brightness(1.18) drop-shadow(0 0 0.6cqw rgba(255, 210, 130, 0.6));
+}
+
+/* Golden dust drifting around the book */
+.rb-dust {
+  position: absolute;
+  inset: -8% -4%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.rb-dust span {
+  position: absolute;
+  bottom: 0;
+  left: calc(var(--i) * 7.3%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 218, 140, 0.9);
+  box-shadow: 0 0 8px rgba(255, 200, 110, 0.9);
+  opacity: 0;
+  animation: rb-dust 9s linear infinite;
+  animation-delay: calc(var(--i) * -0.7s);
+}
+
+/* Lightbox: photos and videos open inside a looking-glass mirror */
+.rb-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  background: rgba(6, 8, 18, 0.72);
+  backdrop-filter: blur(6px);
+}
+
+.rb-lightbox__mirror {
+  width: min(78vw, 980px);
+  max-height: 82vh;
+  padding: 14px;
+  border-radius: 48% / 40%;
+  background: linear-gradient(135deg, #f1d58e, #9a6a25 40%, #f6e2a8 60%, #8a5a1c);
+  box-shadow: 0 0 60px rgba(255, 210, 130, 0.35), 0 30px 60px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+
+.rb-lightbox__mirror img,
+.rb-lightbox__mirror video {
+  display: block;
+  width: 100%;
+  max-height: calc(82vh - 28px);
+  object-fit: contain;
+  border-radius: 46% / 38%;
+  background: #0d0f18;
+}
+
+@keyframes rb-glow {
+  0%, 100% { opacity: 0.6; transform: scale(0.95); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes rb-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-0.4cqw); }
+}
+
+@keyframes rb-dust {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  15% { opacity: 1; }
+  100% { transform: translateY(-90vh) translateX(30px); opacity: 0; }
+}
+
+@media (max-width: 767px) {
+  .rb-ribbons {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rb-illustration img,
+  .rb-illustration::before,
+  .rb-dust span {
+    animation: none;
+  }
+}
+
+.rb-overlay {
+  background: radial-gradient(ellipse at center, rgba(20, 24, 48, 0.35), rgba(4, 6, 16, 0.78)) !important;
+  backdrop-filter: blur(8px) brightness(0.7) saturate(0.85) !important;
+}

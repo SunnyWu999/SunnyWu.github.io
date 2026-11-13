@@ -1,0 +1,134 @@
+{
+  "_how_to_edit": "Every chapter is one dish on the table. Every entry is one spread (two pages) of the book. Change the words between the quotes. Fields you can use in any entry: name, served, tag, ingredients (a list), method, notes, photo, video. For photo/video, put the file in public/media/ and write it like \"/media/my-photo.jpg\" or \"/media/my-clip.mp4\". Leave a field as \"\" to hide it. Keep method to about 3 sentences so it fits the page.",
+  "chapters": [
+    {
+      "id": "cocktails",
+      "ribbon": "Cocktails",
+      "title": "Cocktails for a Brave Life",
+      "subtitle": "each drink is one crazy thing I tried",
+      "image": "cocktails",
+      "entries": [
+        {
+          "name": "The Free Fall Spritz",
+          "served": "Somewhere over the clouds · Summer",
+          "tag": "Proof 91 — I almost backed out",
+          "ingredients": ["2 oz pure adrenaline", "1 friend who dared me", "a dash of “what am I doing”", "14,000 feet of sky"],
+          "method": "Climb into a tiny plane. Regret everything. Jump anyway, scream for sixty seconds straight, then land and immediately want to go again.",
+          "notes": "Terrifying start, unbelievably sweet finish.",
+          "photo": "",
+          "video": ""
+        },
+        {
+          "name": "The Midnight Dip",
+          "served": "A frozen lake · Winter",
+          "tag": "Proof 74 — my toes still remember",
+          "ingredients": ["1 hole in the ice", "3 brave friends", "a thermos of hot chocolate"],
+          "method": "Count to three. Lie about counting to three. Go in on two. Come out laughing and unable to feel your face.",
+          "notes": "Cold, sharp, and strangely joyful.",
+          "photo": "",
+          "video": ""
+        }
+      ]
+    },
+    {
+      "id": "cake",
+      "ribbon": "Friendship",
+      "title": "Recipe for Friendship",
+      "subtitle": "every slice is someone I love",
+      "image": "cake",
+      "entries": [
+        {
+          "name": "A Friend's Name",
+          "served": "Baking together since 2019",
+          "tag": "Favorite thing: 2 a.m. dumplings",
+          "ingredients": ["1 cup of terrible jokes", "endless patience", "a shared playlist", "a pinch of chaos"],
+          "method": "Met by accident, stayed on purpose. Write how you met here — the funnier the better.",
+          "notes": "Serve warm, ideally around a crowded table.",
+          "photo": "",
+          "video": ""
+        }
+      ]
+    },
+    {
+      "id": "travel-board",
+      "ribbon": "Travels",
+      "title": "Recipes from Around the World",
+      "subtitle": "one bite from every place I've been",
+      "image": "travel-board",
+      "entries": [
+        {
+          "name": "A Place I Loved",
+          "served": "City, Country · Year",
+          "tag": "The dish: what I ate there",
+          "ingredients": ["one wrong turn", "a street-food stall", "a stranger's recommendation"],
+          "method": "Write the memory here: where you were, what you ate, and the moment you'll never forget.",
+          "notes": "Tasted like freedom.",
+          "photo": "",
+          "video": ""
+        }
+      ]
+    },
+    {
+      "id": "comfort",
+      "ribbon": "My Story",
+      "title": "The First Recipe",
+      "subtitle": "where I come from",
+      "image": "comfort-dish",
+      "entries": [
+        {
+          "name": "Zhajiangmian",
+          "served": "Family kitchen · Since forever",
+          "tag": "The taste of home",
+          "ingredients": ["hand-pulled noodles", "savory bean sauce", "crisp cucumber", "a family that feeds everyone"],
+          "method": "Write your story here: where you grew up, who taught you to cook, and why you say yes to everything.",
+          "notes": "Best eaten loudly, with people you love.",
+          "photo": "",
+          "video": ""
+        }
+      ]
+    },
+    {
+      "id": "macarons",
+      "ribbon": "Creations",
+      "title": "Creative Experiments",
+      "subtitle": "things I made just to see if I could",
+      "image": "macarons",
+      "entries": [
+        {
+          "name": "A Project Name",
+          "served": "Medium · Year",
+          "tag": "Flavor: art / film / writing / code",
+          "ingredients": ["one late-night idea", "the tools you used", "too much coffee"],
+          "method": "Describe what you made, how you made it, and what surprised you along the way.",
+          "notes": "Result: something I'm proud of.",
+          "photo": "",
+          "video": ""
+        }
+      ]
+    },
+    {
+      "id": "fortune-cookies",
+      "ribbon": "Fortunes",
+      "title": "Secret Ingredients",
+      "subtitle": "crack one open",
+      "image": "fortune-cookies",
+      "kind": "fortune",
+      "entries": [
+        { "name": "What would be your last meal?", "method": "Write your answer here." },
+        { "name": "What's the craziest thing on your list?", "method": "Write your answer here." },
+        { "name": "Who would you invite to dinner, living or not?", "method": "Write your answer here." }
+      ]
+    },
+    {
+      "id": "seat",
+      "ribbon": "Guest Book",
+      "title": "The Guest Book",
+      "subtitle": "pull up a chair",
+      "image": "empty-chair",
+      "kind": "guestbook",
+      "entries": [
+        { "name": "There's always room at this table", "method": "Leave a note, a dare, or a recipe I should try." }
+      ]
+    }
+  ]
+}

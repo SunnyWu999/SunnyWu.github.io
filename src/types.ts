@@ -1,3 +1,9 @@
+export type StoryBlock =
+  | { type: 'text'; content: string }
+  | { type: 'image'; src: string; caption?: string }
+  | { type: 'video'; src: string; poster?: string; caption?: string }
+  | { type: 'quote'; content: string }
+
 export type PlaceholderEntry = {
   id: string
   title: string
@@ -13,7 +19,7 @@ export type Cocktail = {
   location: string
   ingredients: string[]
   proof: number
-  story: string
+  story: string | StoryBlock[]
   images: string[]
 }
 
@@ -24,6 +30,7 @@ export type Friend = {
   friendsSince: string
   memory: string
   photo: string
+  story?: StoryBlock[]
 }
 
 export type TravelStop = {
@@ -34,6 +41,7 @@ export type TravelStop = {
   memory: string
   photos: string[]
   coordinates: [number, number]
+  story?: StoryBlock[]
 }
 
 export type AboutStory = {
@@ -42,6 +50,7 @@ export type AboutStory = {
   summary: string
   recipe?: string
   image?: string
+  story?: StoryBlock[]
 }
 
 export type CreativeProject = {
@@ -51,12 +60,14 @@ export type CreativeProject = {
   description: string
   image: string
   link: string
+  story?: StoryBlock[]
 }
 
 export type Fortune = {
   id: string
   question: string
   answer: string
+  story?: StoryBlock[]
 }
 
 export type ResumeCourse = {
@@ -65,6 +76,7 @@ export type ResumeCourse = {
   date: string
   description: string
   details: string[]
+  story?: StoryBlock[]
 }
 
 export type ResumeMenu = {

@@ -1,34 +1,119 @@
 {
   "id": "resume-1",
-  "title": "[PLACEHOLDER]",
+  "title": "SUNNY SIDE UP",
+  "subtitle": "TASTING MENU",
   "courses": [
     {
-      "id": "course-1",
-      "title": "[PLACEHOLDER]",
-      "date": "[PLACEHOLDER]",
-      "description": "[PLACEHOLDER]",
-      "details": ["[PLACEHOLDER]", "[PLACEHOLDER]", "[PLACEHOLDER]"]
+      "id": "amuse-bouche",
+      "section": "Amuse-bouche",
+      "title": "A warm hello",
+      "description": "A quick introduction to the work, the craft, and the story behind the table.",
+      "details": [
+        "Thoughtful interfaces for curious brands.",
+        "Calm, human-centered product design.",
+        "A little magic in the details."
+      ]
     },
     {
-      "id": "course-2",
-      "title": "[PLACEHOLDER]",
-      "date": "[PLACEHOLDER]",
-      "description": "[PLACEHOLDER]",
-      "details": ["[PLACEHOLDER]", "[PLACEHOLDER]", "[PLACEHOLDER]"]
+      "id": "first-course",
+      "section": "First Course",
+      "title": "Education",
+      "company": "Design & systems studies",
+      "date": "2013 — 2018",
+      "details": [
+        "Interaction design fundamentals.",
+        "Visual storytelling and editorial rhythm.",
+        "Research, prototyping, and usability practice."
+      ]
     },
     {
-      "id": "course-3",
-      "title": "[PLACEHOLDER]",
-      "date": "[PLACEHOLDER]",
-      "description": "[PLACEHOLDER]",
-      "details": ["[PLACEHOLDER]", "[PLACEHOLDER]", "[PLACEHOLDER]"]
+      "id": "main-courses",
+      "section": "Main Courses",
+      "title": "Product Designer • Frontend Engineer",
+      "company": "Independent studio",
+      "date": "2019 — present",
+      "details": [
+        "Designs resilient interfaces that balance clarity, warmth, and motion.",
+        "Builds accessible front-end experiences with React, TypeScript, and CSS.",
+        "Turns strategy into polished experiences that feel personal and useful."
+      ]
     },
     {
-      "id": "course-4",
-      "title": "[PLACEHOLDER]",
-      "date": "[PLACEHOLDER]",
-      "description": "[PLACEHOLDER]",
-      "details": ["[PLACEHOLDER]", "[PLACEHOLDER]", "[PLACEHOLDER]"]
+      "id": "chef-specials",
+      "section": "Chef's Specials",
+      "title": "Selected Projects",
+      "company": "Portfolio highlights",
+      "date": "2020 — 2026",
+      "details": [
+        "A story-rich portfolio that blends editorial design with product thinking.",
+        "A route-driven experience that pairs cinematic motion with practical UX.",
+        "A system of reusable components tuned for speed, clarity, and delight."
+      ]
+    },
+    {
+      "id": "sides",
+      "section": "Sides",
+      "title": "Skills",
+      "company": "Craft + code",
+      "date": "Always in motion",
+      "details": [
+        "Design systems",
+        "Brand storytelling",
+        "UX strategy",
+        "Frontend engineering",
+        "Accessibility",
+        "Art direction"
+      ]
+    },
+    {
+      "id": "wine-pairing",
+      "section": "Wine Pairing",
+      "title": "Tools",
+      "company": "Current stack",
+      "date": "Selected stack",
+      "details": [
+        "React",
+        "TypeScript",
+        "Vite",
+        "Figma",
+        "Framer Motion",
+        "Supabase"
+      ]
+    },
+    {
+      "id": "dessert",
+      "section": "Dessert",
+      "title": "Awards & Notes",
+      "company": "Recognition",
+      "date": "Selected highlights",
+      "details": [
+        "Design awards and feature mentions",
+        "Mentorship and product critique",
+        "Thoughtful, collaborative delivery"
+      ]
+    },
+    {
+      "id": "critics",
+      "section": "Notes from the Critics",
+      "title": "Kind words",
+      "company": "Clients & collaborators",
+      "date": "From the room",
+      "details": [
+        "\"Calm, thoughtful, and uncommonly precise.\"",
+        "\"Brings wonder into practical systems.\"",
+        "\"The work feels warm, clear, and memorable.\""
+      ]
+    },
+    {
+      "id": "check",
+      "section": "The Check",
+      "title": "Let’s make something memorable.",
+      "company": "hello@sunny-side-up.dev",
+      "date": "+1 (415) 555-0148",
+      "details": [
+        "Available for select collaborations and product storytelling.",
+        "Remote-friendly across time zones."
+      ]
     }
   ]
 }

@@ -1,0 +1,299 @@
+/* Tasting menu book — positions are % of the book image (1536 × 1024). */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&display=swap');
+
+.mb-viewport {
+  --ink: #3a2a1d;
+  --ink-soft: #6b5440;
+  --gold: #a7803f;
+  position: relative;
+  width: min(86vw, 112vh, 1240px);
+  perspective: 1600px;
+  font-family: 'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+  color: var(--ink);
+}
+
+.mb-clip {
+  position: relative;
+}
+
+.mb-book {
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1536 / 1024;
+  background: url('/images/scene/menu-book-clear.png') center / 100% 100% no-repeat;
+  filter: drop-shadow(0 30px 40px rgba(20, 12, 6, 0.55)) drop-shadow(0 6px 10px rgba(20, 12, 6, 0.35));
+  transition: transform 450ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.mb-spread {
+  position: absolute;
+  inset: 0;
+}
+
+/* Page text areas, inside the printed borders */
+.mb-page {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 31%;
+}
+
+.mb-page--left {
+  left: 14%;
+}
+
+.mb-page--right {
+  left: 55%;
+}
+
+/* Three slots per page, lined up between the printed leaf dividers */
+.mb-slot {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.mb-slot--1 {
+  top: 15%;
+  height: 25.5%;
+}
+
+.mb-slot--2 {
+  top: 43.6%;
+  height: 14.4%;
+}
+
+.mb-slot--3 {
+  top: 60.6%;
+  height: 20%;
+}
+
+/* On the first page the rabbit is printed at the top, so the title sits under it */
+.mb-slot--1:has(.mb-cover-title) {
+  top: 27.6%;
+  height: 13%;
+}
+
+.mb-slot__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25cqw;
+  max-width: 100%;
+}
+
+.mb-cover-title__main {
+  margin: 0;
+  font-weight: 600;
+  font-size: 2.35cqw;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+
+.mb-cover-title__sub {
+  margin: 0.3cqw 0 0;
+  font-weight: 500;
+  font-size: 1.15cqw;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.mb-section {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.02cqw;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.mb-title {
+  margin: 0.1cqw 0 0;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.95cqw;
+  line-height: 1.12;
+  color: var(--ink);
+}
+
+.mb-meta {
+  margin: 0;
+  font-style: italic;
+  font-size: 0.98cqw;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+}
+
+.mb-line {
+  margin: 0;
+  font-size: 0.98cqw;
+  line-height: 1.3;
+  color: var(--ink-soft);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Wax seal download button on "The Check" */
+.mb-seal {
+  margin-top: 0.6cqw;
+  display: inline-grid;
+  place-items: center;
+  width: 6.2cqw;
+  height: 6.2cqw;
+  border-radius: 50%;
+  padding: 0.4cqw;
+  font-size: 0.72cqw;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #f6e6c8;
+  background: radial-gradient(circle at 35% 30%, #c0392b, #7b1c14 70%);
+  box-shadow: inset 0 0 0 0.25cqw rgba(255, 255, 255, 0.12), 0 0.3cqw 0.6cqw rgba(60, 10, 5, 0.45);
+  transition: transform 200ms ease;
+}
+
+.mb-seal:hover,
+.mb-seal:focus-visible {
+  transform: scale(1.06) rotate(-4deg);
+}
+
+/* Page numbers */
+.mb-folio {
+  position: absolute;
+  top: 80.6%;
+  width: 31%;
+  margin: 0;
+  text-align: center;
+  font-style: italic;
+  font-size: 0.9cqw;
+  color: var(--ink-soft);
+  opacity: 0.8;
+}
+
+.mb-folio--left {
+  left: 14%;
+}
+
+.mb-folio--right {
+  left: 55%;
+}
+
+/* Previous / next, under the book */
+.mb-turn {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.45rem 1.1rem;
+  border: 1px solid rgba(240, 220, 180, 0.45);
+  border-radius: 999px;
+  background: rgba(40, 26, 16, 0.55);
+  color: #f3e3c3;
+  font-family: inherit;
+  font-size: 1.05rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background 200ms ease, opacity 200ms ease, transform 200ms ease;
+}
+
+.mb-turn span {
+  font-size: 0.8rem;
+}
+
+.mb-turn:hover:not(:disabled),
+.mb-turn:focus-visible {
+  background: rgba(90, 60, 30, 0.75);
+  transform: translateY(-1px);
+}
+
+.mb-turn:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.mb-turn--prev {
+  left: 20%;
+}
+
+.mb-turn--next {
+  right: 20%;
+}
+
+/* Close button on the top-right corner of the cover */
+.mb-close {
+  position: absolute;
+  top: 4.5%;
+  right: 0.5%;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+  border: 1px solid rgba(167, 128, 63, 0.7);
+  background: radial-gradient(circle at 35% 30%, #f7ecd6, #e4d1ad);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(20, 12, 6, 0.35);
+  transition: transform 200ms ease;
+}
+
+.mb-close:hover,
+.mb-close:focus-visible {
+  transform: rotate(90deg) scale(1.05);
+}
+
+/* Phones: zoom in so one page fills the screen; swipe or tap next to turn */
+@media (max-width: 767px) {
+  .mb-viewport {
+    width: 94vw;
+  }
+
+  .mb-clip {
+    overflow: hidden;
+  }
+
+  .mb-book {
+    /* one page fills the width, but never taller than the screen */
+    width: min(235vw, 130vh);
+    max-width: none;
+  }
+
+  /* center the visible page in the screen */
+  .mb-viewport--left .mb-book {
+    transform: translateX(calc(47vw - 29.5%));
+  }
+
+  .mb-viewport--right .mb-book {
+    transform: translateX(calc(47vw - 70.5%));
+  }
+
+  .mb-close {
+    top: -3.4rem;
+    right: 0;
+  }
+
+  .mb-turn--prev {
+    left: 4%;
+  }
+
+  .mb-turn--next {
+    right: 4%;
+  }
+}
