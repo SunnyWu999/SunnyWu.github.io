@@ -1,0 +1,56 @@
+{
+  "_how_to_edit": "This is where you share your story. Each chapter has a year/label, a title, a short teaser and a \"story\" list of blocks: {\"type\":\"text\",\"content\"}, {\"type\":\"image\",\"src\",\"caption\"}, {\"type\":\"video\",\"src\",\"poster\",\"caption\"}, {\"type\":\"quote\",\"content\"}. Put photos and videos in public/media/. Visitors unlock chapters one by one. The chapters below are SAMPLE text (\"placeholder\": true) — replace them with your own, then set \"placeholder\" to false.",
+  "title": "My Story",
+  "subtitle": "a little at a time",
+  "chapters": [
+    {
+      "id": "beginning",
+      "label": "Chapter I",
+      "title": "Where it began",
+      "teaser": "Every story starts somewhere small.",
+      "placeholder": true,
+      "story": [
+        { "type": "text", "content": "Every story starts somewhere small — a hole under a tree, a door too tiny to fit through, a question that will not go away." },
+        { "type": "quote", "content": "“Begin at the beginning, and go on till you come to the end: then stop.”" },
+        { "type": "image", "src": "/media/wonderland-photo.svg", "caption": "A first photograph goes here." },
+        { "type": "text", "content": "Write the opening of your own story in this chapter: where you started, and what you were curious about." }
+      ]
+    },
+    {
+      "id": "the-fall",
+      "label": "Chapter II",
+      "title": "The fall",
+      "teaser": "Then the ground disappears.",
+      "placeholder": true,
+      "story": [
+        { "type": "text", "content": "And then the ground is gone. Down, down, down — past shelves of books and lamps and jars, with plenty of time to wonder what comes next." },
+        { "type": "video", "src": "/media/fall-720p.mp4", "poster": "/media/looking-glass-poster.svg", "caption": "A short video from this chapter can play here." },
+        { "type": "text", "content": "Use this chapter for the big leap — the move, the job, the risk that changed your direction." }
+      ]
+    },
+    {
+      "id": "the-tea-party",
+      "label": "Chapter III",
+      "title": "The tea party",
+      "teaser": "Strange company makes the best stories.",
+      "placeholder": true,
+      "story": [
+        { "type": "text", "content": "Nothing makes sense at a tea party, and that is exactly the charm of it. The best people are the ones who pour you a cup and ask the wrong, wonderful questions." },
+        { "type": "image", "src": "/media/wonderland-photo.svg", "caption": "Friends, teammates, mentors — put their photo here." },
+        { "type": "quote", "content": "“Why, sometimes I’ve believed as many as six impossible things before breakfast.”" }
+      ]
+    },
+    {
+      "id": "the-garden",
+      "label": "Chapter IV",
+      "title": "The garden",
+      "teaser": "And the story is still being written.",
+      "placeholder": true,
+      "story": [
+        { "type": "text", "content": "Past the last door is a garden, and it is still growing. This chapter is for what you are working toward now — and an invitation for the reader to join in." },
+        { "type": "quote", "content": "“It’s no use going back to yesterday, because I was a different person then.”" },
+        { "type": "text", "content": "Thank you for reading this far. Leave a note on the wall before you go." }
+      ]
+    }
+  ]
+}

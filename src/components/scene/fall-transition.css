@@ -1,0 +1,310 @@
+/* Rabbit-hole transition. Everything is driven by CSS animation timed against --ft-total (4000ms). */
+
+.ft {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  overflow: hidden;
+  background: #07070d;
+  animation: ft-in 160ms ease-out both, ft-out 600ms ease-in calc(var(--ft-total) - 700ms) forwards;
+}
+
+.ft--skip {
+  animation: ft-out 300ms ease-in forwards;
+}
+
+@keyframes ft-in {
+  from { opacity: 0; }
+}
+
+@keyframes ft-out {
+  to { opacity: 0; }
+}
+
+/* 1 — the scene we leave zooms toward the hole; the scene we arrive in settles back out */
+.ft__scene {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  will-change: transform, opacity;
+}
+
+.ft__scene--start {
+  transform-origin: 11% 66%;
+  animation: ft-dive 1100ms cubic-bezier(0.55, 0, 0.9, 0.4) forwards;
+}
+
+.ft--rise .ft__scene--start {
+  transform-origin: 50% 60%;
+}
+
+@keyframes ft-dive {
+  0% { transform: scale(1); filter: brightness(1) blur(0); opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: scale(5.5); filter: brightness(0.25) blur(5px); opacity: 0; }
+}
+
+.ft__scene--land {
+  opacity: 0;
+  transform-origin: 11% 66%;
+  animation: ft-land 1100ms cubic-bezier(0.1, 0.6, 0.3, 1) calc(var(--ft-total) - 1700ms) forwards;
+}
+
+.ft--fall .ft__scene--land {
+  transform-origin: 50% 50%;
+}
+
+@keyframes ft-land {
+  0% { opacity: 0; transform: scale(1.25); filter: blur(6px) brightness(1.5); }
+  100% { opacity: 1; transform: scale(1); filter: blur(0) brightness(1); }
+}
+
+/* 2 — the tunnel: a tall illustration scrolls past, content moving up while we fall */
+.ft__tunnel {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0;
+  animation: ft-tunnel-show 400ms ease-out 700ms forwards;
+}
+
+@keyframes ft-tunnel-show {
+  to { opacity: 1; }
+}
+
+.ft__tunnel-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: max(177vw, 150vh);
+  object-fit: cover;
+  will-change: transform;
+  animation: ft-scroll 2700ms cubic-bezier(0.45, 0.05, 0.4, 1) 700ms both;
+}
+
+.ft--rise .ft__tunnel-img {
+  animation-name: ft-scroll-up;
+}
+
+@keyframes ft-scroll {
+  from { transform: translateY(0) scale(1.05) rotate(-1.5deg); }
+  to { transform: translateY(calc(-100% + 100vh)) scale(1.05) rotate(1.5deg); }
+}
+
+@keyframes ft-scroll-up {
+  from { transform: translateY(calc(-100% + 100vh)) scale(1.05) rotate(1.5deg); }
+  to { transform: translateY(0) scale(1.05) rotate(-1.5deg); }
+}
+
+/* colour grade: falling darkens toward night, floating up brightens toward daylight */
+.ft__tint {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: #101a45;
+  mix-blend-mode: multiply;
+  opacity: 0;
+}
+
+.ft--fall .ft__tint {
+  animation: ft-tint-fall 1900ms ease-in 1300ms forwards;
+}
+
+.ft--rise .ft__tint {
+  opacity: 0.75;
+  animation: ft-tint-rise 2000ms ease-out 900ms forwards;
+}
+
+@keyframes ft-tint-fall {
+  to { opacity: 0.8; }
+}
+
+@keyframes ft-tint-rise {
+  to { opacity: 0; }
+}
+
+.ft__glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.ft--rise .ft__glow {
+  background: radial-gradient(circle at 50% 35%, #fff7dc 0%, rgba(255, 233, 160, 0.7) 35%, transparent 75%);
+  animation: ft-glow 1100ms ease-in-out 2300ms forwards;
+}
+
+.ft--fall .ft__glow {
+  background: radial-gradient(circle at 50% 70%, rgba(150, 190, 255, 0.55) 0%, transparent 65%);
+  animation: ft-glow 1300ms ease-in-out 2100ms forwards;
+}
+
+@keyframes ft-glow {
+  0% { opacity: 0; }
+  60% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+/* floating things: one slow pass up (or down) the screen, spinning as they go */
+.ft__floaters {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.ft__floater {
+  position: absolute;
+  top: 0;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  opacity: 0;
+  animation-name: ft-pass;
+  animation-timing-function: cubic-bezier(0.3, 0.1, 0.7, 0.9);
+  animation-fill-mode: both;
+  filter: blur(var(--blur, 0)) drop-shadow(0 1.2vmin 1.6vmin rgba(15, 8, 4, 0.55));
+}
+
+.ft__floater img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  animation: ft-spin 3.4s ease-in-out infinite alternate;
+}
+
+@keyframes ft-pass {
+  0% { transform: translateY(var(--from)); opacity: 0; }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { transform: translateY(var(--to)); opacity: 0; }
+}
+
+@keyframes ft-spin {
+  from { transform: rotate(calc(var(--spin) * -0.5)); }
+  to { transform: rotate(var(--spin)); }
+}
+
+/* treasures can be caught: they glow, and pop when you tap them */
+.ft__floater--treasure {
+  pointer-events: auto;
+  cursor: pointer;
+  filter: blur(0) drop-shadow(0 0 1.6vmin rgba(255, 214, 120, 0.85));
+}
+
+.ft__floater--treasure:hover,
+.ft__floater--treasure:focus-visible {
+  filter: blur(0) drop-shadow(0 0 2.6vmin rgba(255, 233, 160, 1));
+}
+
+.ft__floater--treasure.is-caught img {
+  filter: saturate(0.55) brightness(0.9);
+}
+
+.ft__floater--treasure:active img {
+  transform: scale(1.3);
+}
+
+/* photos drift past in feathered, vintage ovals */
+.ft__floater--photo {
+  aspect-ratio: 4 / 3;
+}
+
+.ft__floater--photo img {
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 0.5vmin solid #a7803f;
+  filter: sepia(0.35) contrast(1.05);
+  box-shadow: 0 0 0 0.25vmin rgba(255, 233, 180, 0.6), inset 0 0 2.5vmin rgba(40, 20, 8, 0.55);
+}
+
+/* words written on the dark */
+.ft__line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 16%;
+  margin: 0;
+  text-align: center;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1.8rem, 5.2vw, 3.6rem);
+  letter-spacing: 0.04em;
+  color: #fff1cf;
+  text-shadow: 0 0 22px rgba(255, 205, 120, 0.9), 0 2px 8px rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  animation: ft-line 1900ms ease-in-out 1000ms forwards;
+}
+
+@keyframes ft-line {
+  0% { opacity: 0; letter-spacing: 0.3em; filter: blur(8px); }
+  30% { opacity: 1; letter-spacing: 0.06em; filter: blur(0); }
+  75% { opacity: 1; }
+  100% { opacity: 0; filter: blur(4px); }
+}
+
+.ft__catch {
+  position: absolute;
+  left: 1.6rem;
+  bottom: 1.8rem;
+  margin: 0;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid rgba(255, 233, 180, 0.55);
+  border-radius: 999px;
+  background: rgba(20, 14, 10, 0.5);
+  color: #ffe9b8;
+  font-family: 'Caveat', 'Bradley Hand', cursive;
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  opacity: 0;
+  animation: ft-catch 2600ms ease-in-out 900ms forwards;
+}
+
+@keyframes ft-catch {
+  0%, 100% { opacity: 0; }
+  15%, 85% { opacity: 1; }
+}
+
+/* the tunnel wall closes in at the edges */
+.ft__vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 45%, rgba(4, 3, 8, 0.65) 100%);
+  animation: ft-vignette-out 900ms ease-in calc(var(--ft-total) - 1200ms) forwards;
+}
+
+@keyframes ft-vignette-out {
+  to { opacity: 0; }
+}
+
+.ft__skip {
+  position: absolute;
+  right: 2rem;
+  bottom: 2rem;
+  z-index: 3;
+  border: 1px solid rgba(255, 240, 202, 0.7);
+  border-radius: 999px;
+  background: rgba(27, 21, 29, 0.45);
+  color: #f8ebd9;
+  padding: 0.55rem 1rem;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  cursor: pointer;
+}
+
+.ft__skip:hover,
+.ft__skip:focus-visible {
+  background: rgba(60, 40, 22, 0.7);
+  box-shadow: 0 0 18px rgba(255, 210, 130, 0.5);
+}
+
+@media (max-width: 600px) {
+  .ft__skip { right: 1rem; bottom: 1rem; }
+  .ft__catch { left: 1rem; bottom: 1.2rem; font-size: 1rem; }
+}

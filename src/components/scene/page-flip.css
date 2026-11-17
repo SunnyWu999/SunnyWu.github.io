@@ -1,0 +1,127 @@
+/* 3D page turn — see PageFlip.tsx */
+
+.pf-stage {
+  position: absolute;
+  inset: 0;
+  perspective: 2600px;
+  perspective-origin: 50% 40%;
+}
+
+.pf-leaf {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 6;
+  pointer-events: none;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  will-change: transform;
+  /* held at the start until the pages under it have painted (see PageFlip.tsx) */
+  animation: pf-turn var(--pf-ms, 1100ms) cubic-bezier(0.62, 0.02, 0.28, 1) both paused,
+    pf-lift var(--pf-ms, 1100ms) ease-in-out both paused;
+}
+
+.pf-leaf.is-go {
+  animation-play-state: running;
+}
+
+.pf-leaf--prev {
+  animation-direction: reverse;
+}
+
+/* ONE continuous rotation — extra keyframes would re-ease at every stop and feel jerky */
+@keyframes pf-turn {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(-180deg); }
+}
+
+/* the leaf rises a little toward the reader as it crosses the middle, like real paper */
+@keyframes pf-lift {
+  0%, 100% { scale: 1; translate: 0 0 0; }
+  50% { scale: 1.035; translate: 0 -0.6% 0; }
+}
+
+.pf-face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background-image: url('/images/scene/menu-book-clear.png');
+  background-size: 200% 100%;
+  transform: translateZ(0);
+}
+
+/* only the paper turns — not the leather cover or the transparent margin of the book art */
+.pf-face--front {
+  background-position: 100% 0;
+  clip-path: inset(10% 11% 10.5% 0);
+}
+
+.pf-face--back {
+  transform: rotateY(180deg) translateZ(0);
+  background-position: 0 0;
+  clip-path: inset(10% 0 10.5% 12%);
+}
+
+/* each face carries the whole spread's coordinate system so the page slots line up */
+.pf-frame {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 200%;
+}
+
+.pf-frame--front {
+  left: -100%;
+}
+
+.pf-frame--back {
+  left: 0;
+}
+
+/* shading: the paper darkens toward the spine as it stands on edge, then lights up again */
+.pf-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.pf-face--front .pf-shade {
+  background: linear-gradient(to right, rgba(40, 22, 8, 0.05), rgba(40, 22, 8, 0.6));
+  animation: pf-shade-front var(--pf-ms, 1100ms) ease-in both paused;
+}
+
+.pf-face--back .pf-shade {
+  background: linear-gradient(to left, rgba(40, 22, 8, 0.05), rgba(40, 22, 8, 0.6));
+  animation: pf-shade-back var(--pf-ms, 1100ms) ease-out both paused;
+}
+
+.pf-leaf.is-go .pf-shade {
+  animation-play-state: running;
+}
+
+.pf-leaf--prev .pf-shade {
+  animation-direction: reverse;
+}
+
+@keyframes pf-shade-front {
+  0% { opacity: 0; }
+  50% { opacity: 0.9; }
+  100% { opacity: 0.9; }
+}
+
+@keyframes pf-shade-back {
+  0% { opacity: 0.9; }
+  50% { opacity: 0.9; }
+  100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-leaf {
+    display: none;
+  }
+}

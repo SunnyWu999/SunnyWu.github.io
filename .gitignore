@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Not part of the website (kept locally only)
+_backup/
+_source-assets/
+.claude/

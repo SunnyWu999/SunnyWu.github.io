@@ -3,6 +3,9 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useState } from 'react'
 import PersonalScene from './components/scene/PersonalScene'
 import ProfessionalScene from './components/scene/ProfessionalScene'
+import FallTransition, { type Direction } from './components/scene/FallTransition'
+import GameHud from './game/GameHud'
+import Guide from './game/Guide'
 import './personal.css'
 import './professional.css'
 
@@ -24,91 +27,30 @@ function ProfessionalRoute({ onToggleScene }: { onToggleScene: () => void }) {
   return <ProfessionalScene onToggleScene={onToggleScene} />
 }
 
-function SceneTransitionOverlay({ direction, onSkip, onComplete }: { direction: 'fall' | 'rise'; onSkip: () => void; onComplete: () => void }) {
-  const reducedMotion = useReducedMotion()
-
-  if (reducedMotion) {
-    return (
-      <motion.div
-        className="scene-transition scene-transition--reduced"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.24, ease: 'easeInOut' }}
-        aria-live="polite"
-      >
-        <div className="scene-transition__sparkles" aria-hidden="true" />
-        <button type="button" className="scene-transition__skip" onClick={onSkip}>
-          skip
-        </button>
-      </motion.div>
-    )
-  }
-
-  const isPhone = typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches
-  const videoSource = direction === 'fall' ? (isPhone ? '/media/fall-720p.mp4' : '/media/fall.mp4') : (isPhone ? '/media/fall-reverse-720p.mp4' : '/media/fall-reverse.mp4')
-
-  return (
-    <motion.div
-      className={`scene-transition scene-transition--${direction}`}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.35, ease: 'easeInOut' }}
-      aria-live="polite"
-    >
-      <video
-        key={direction}
-        className="scene-transition__video"
-        src={videoSource}
-        autoPlay
-        muted
-        playsInline
-        preload="auto"
-        onEnded={onComplete}
-        poster={direction === 'fall' ? '/images/scene/scene-personal.webp' : '/images/scene/scene-professional.webp'}
-      />
-      <div className="scene-transition__video-fade" aria-hidden="true" />
-      <button type="button" className="scene-transition__skip" onClick={onSkip}>
-        skip
-      </button>
-    </motion.div>
-  )
-}
-
 function SceneLayout() {
   const location = useLocation()
   const navigate = useNavigate()
   const reducedMotion = useReducedMotion()
   const isProfessional = location.pathname === '/professional'
-  const [transitionDirection, setTransitionDirection] = useState<'fall' | 'rise' | null>(null)
+  const [transition, setTransition] = useState<{ direction: Direction; to: string } | null>(null)
 
   const handleToggle = () => {
-    const nextPath = isProfessional ? '/' : '/professional'
+    const to = isProfessional ? '/' : '/professional'
     // professional → personal = fall down the hole; personal → professional = float back up
-    const nextDirection = isProfessional ? 'fall' : 'rise'
-
     if (reducedMotion) {
-      navigate(nextPath)
+      navigate(to)
       return
     }
-
-    setTransitionDirection(nextDirection)
-  }
-
-  const completeTransition = () => {
-    setTransitionDirection(null)
-    navigate(isProfessional ? '/' : '/professional')
-  }
-
-  const handleSkip = () => {
-    setTransitionDirection(null)
-    navigate(isProfessional ? '/' : '/professional')
+    setTransition({ direction: isProfessional ? 'fall' : 'rise', to })
   }
 
   return (
     <div className="scene-shell">
-      {transitionDirection ? <SceneTransitionOverlay direction={transitionDirection} onSkip={handleSkip} onComplete={completeTransition} /> : null}
+      <GameHud scene={isProfessional ? 'professional' : 'personal'} />
+      {transition ? null : <Guide scene={isProfessional ? 'professional' : 'personal'} />}
+      {transition ? (
+        <FallTransition key={transition.to} direction={transition.direction} onSwap={() => navigate(transition.to)} onDone={() => setTransition(null)} />
+      ) : null}
 
       <AnimatePresence mode="wait">
         <motion.div

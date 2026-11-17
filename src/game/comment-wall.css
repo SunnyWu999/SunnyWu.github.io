@@ -1,0 +1,274 @@
+.cw {
+  display: grid;
+  grid-template-columns: minmax(15rem, 20rem) 1fr;
+  gap: 1.4rem;
+  align-items: start;
+}
+
+.cw__form {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.cw__preview {
+  position: relative;
+  min-height: 7rem;
+  padding: 0.9rem 1rem 0.7rem;
+  border-radius: 0.2rem;
+  box-shadow: 0 8px 18px rgba(60, 35, 15, 0.3);
+  transform: rotate(-2deg);
+  transition: background 300ms ease;
+}
+
+.cw__preview p,
+.cw__note p {
+  margin: 0;
+  font-family: 'Caveat', cursive;
+  font-size: 1.35rem;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.cw__preview em {
+  font-size: 0.95rem;
+  color: #6b5440;
+}
+
+.cw__sticker {
+  position: absolute;
+  top: -0.7rem;
+  right: -0.4rem;
+  font-size: 1.7rem;
+  transform: rotate(14deg);
+  filter: drop-shadow(0 2px 3px rgba(60, 35, 15, 0.4));
+}
+
+.cw__label {
+  display: grid;
+  gap: 0.2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #6b5440;
+  position: relative;
+}
+
+.cw__label span {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  font-style: italic;
+}
+
+.cw__label input,
+.cw__label textarea {
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid rgba(167, 128, 63, 0.8);
+  border-radius: 0.4rem;
+  background: rgba(255, 252, 240, 0.8);
+  color: #3a2a1d;
+  font-family: 'Caveat', cursive;
+  font-size: 1.25rem;
+  resize: vertical;
+}
+
+.cw__label input:focus,
+.cw__label textarea:focus {
+  outline: 2px solid rgba(184, 138, 62, 0.8);
+  background: #fffdf3;
+}
+
+.cw__count {
+  position: absolute;
+  right: 0.4rem;
+  bottom: 0.2rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.78rem;
+  opacity: 0.7;
+}
+
+.cw__trap {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+}
+
+.cw__pick {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.cw__pick button {
+  width: 2.1rem;
+  height: 2.1rem;
+  border: 2px solid rgba(90, 60, 30, 0.35);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  background: #fffaf0;
+  transition: transform 160ms ease, border-color 160ms ease;
+}
+
+.cw__pick button:hover {
+  transform: scale(1.12);
+}
+
+.cw__pick button.is-on {
+  border-color: #8e2b2b;
+  transform: scale(1.18);
+  box-shadow: 0 0 10px rgba(142, 43, 43, 0.5);
+}
+
+.cw__send {
+  padding: 0.65rem 1rem;
+  border: 1px solid #5a2a14;
+  border-radius: 0.6rem;
+  background: radial-gradient(circle at 30% 25%, #c0392b, #7b1c14 75%);
+  color: #fbeccb;
+  font-family: inherit;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  box-shadow: 0 5px 14px rgba(80, 20, 10, 0.4);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.cw__send:hover,
+.cw__send:focus-visible {
+  transform: translateY(-2px) rotate(-0.6deg);
+  box-shadow: 0 9px 20px rgba(80, 20, 10, 0.5), 0 0 18px rgba(255, 150, 80, 0.5);
+}
+
+.cw__fine {
+  margin: 0;
+  font-size: 0.82rem;
+  font-style: italic;
+  color: #6b5440;
+}
+
+.cw__fine code {
+  font-style: normal;
+  font-size: 0.78rem;
+}
+
+/* the board of pinned notes */
+.cw__board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: 1.3rem 1rem;
+  padding: 1.2rem 1rem;
+  min-height: 18rem;
+  max-height: 60vh;
+  overflow: auto;
+  border-radius: 0.7rem;
+  border: 2px solid #6a4526;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.12), transparent 60%),
+    repeating-linear-gradient(45deg, #b98b5a 0 6px, #b08350 6px 12px);
+  box-shadow: inset 0 0 40px rgba(60, 30, 10, 0.55);
+  align-content: start;
+}
+
+.cw__empty {
+  grid-column: 1 / -1;
+  margin: 3rem 0;
+  text-align: center;
+  font-family: 'Caveat', cursive;
+  font-size: 1.5rem;
+  color: #fbeccb;
+  text-shadow: 0 2px 4px rgba(40, 20, 8, 0.7);
+}
+
+.cw__note {
+  position: relative;
+  display: grid;
+  gap: 0.5rem;
+  align-content: space-between;
+  padding: 1.1rem 0.9rem 0.6rem;
+  min-height: 8.5rem;
+  border-radius: 0.15rem;
+  color: #3a2a1d;
+  box-shadow: 0 7px 14px rgba(40, 20, 8, 0.45);
+  transform: rotate(var(--tilt, 0deg));
+  transform-origin: top center;
+  transition: transform 260ms cubic-bezier(0.2, 0.9, 0.3, 1.3), box-shadow 260ms ease;
+}
+
+.cw__note:hover {
+  transform: rotate(0deg) scale(1.05) translateY(-4px);
+  box-shadow: 0 16px 26px rgba(40, 20, 8, 0.55);
+  z-index: 2;
+}
+
+.cw__note.is-new {
+  animation: cw-drop 800ms cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+
+@keyframes cw-drop {
+  from { opacity: 0; transform: translateY(-80px) rotate(14deg) scale(1.3); }
+}
+
+.cw__pin {
+  position: absolute;
+  top: -0.45rem;
+  left: 50%;
+  width: 0.9rem;
+  height: 0.9rem;
+  margin-left: -0.45rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ff9a8a, #a3241a 70%);
+  box-shadow: 0 3px 4px rgba(40, 10, 5, 0.5);
+}
+
+.cw__note footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 0.4rem;
+}
+
+.cw__note footer em {
+  font-size: 0.85rem;
+  color: #6b5440;
+  line-height: 1.1;
+}
+
+.cw__note footer button {
+  flex: none;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: #8e2b2b;
+  cursor: pointer;
+  transition: transform 160ms ease;
+}
+
+.cw__note footer button:hover {
+  transform: scale(1.25);
+}
+
+.cw__note footer button.is-liked {
+  color: #c0392b;
+  text-shadow: 0 0 8px rgba(255, 100, 80, 0.7);
+}
+
+@media (max-width: 760px) {
+  .cw {
+    grid-template-columns: 1fr;
+  }
+
+  .cw__board {
+    max-height: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cw__note.is-new {
+    animation: none;
+  }
+}

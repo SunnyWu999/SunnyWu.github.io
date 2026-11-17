@@ -1,118 +1,160 @@
 {
-  "id": "resume-1",
+  "id": "resume",
   "title": "SUNNY SIDE UP",
   "subtitle": "TASTING MENU",
   "courses": [
     {
       "id": "amuse-bouche",
-      "section": "Amuse-bouche",
-      "title": "A warm hello",
-      "description": "A quick introduction to the work, the craft, and the story behind the table.",
+      "section": "Amuse-Bouche",
+      "title": "Sunny Wu",
+      "company": "Business Administration · Babson College",
       "details": [
-        "Thoughtful interfaces for curious brands.",
-        "Calm, human-centered product design.",
-        "A little magic in the details."
+        "Founder, venture scout, and consultant focused on early-stage startups and the people who build them.",
+        "Bilingual in English and Mandarin Chinese."
+      ],
+      "date": "Boston & Beijing"
+    },
+    {
+      "id": "nora",
+      "section": "Chef's Special · Now Cooking",
+      "title": "Nora",
+      "company": "Founder",
+      "date": "2026 — Present",
+      "details": [
+        "Building an app that helps older adults navigate everyday technology with confidence."
       ]
     },
     {
-      "id": "first-course",
+      "id": "education",
       "section": "First Course",
-      "title": "Education",
-      "company": "Design & systems studies",
-      "date": "2013 — 2018",
+      "title": "Babson College",
+      "company": "B.S. in Business Administration",
+      "date": "Expected May 2029",
       "details": [
-        "Interaction design fundamentals.",
-        "Visual storytelling and editorial rhythm.",
-        "Research, prototyping, and usability practice."
+        "GPA 3.8/4.0 · Dean's List · Honors Program (top 10%)",
+        "Coursework: Entrepreneurship, Business Analytics, Financial Accounting, Software Design"
       ]
     },
     {
-      "id": "main-courses",
-      "section": "Main Courses",
-      "title": "Product Designer • Frontend Engineer",
-      "company": "Independent studio",
-      "date": "2019 — present",
+      "id": "starting-point-one",
+      "section": "Main Course I",
+      "title": "VC Scout",
+      "company": "Starting Point One · Beijing",
+      "date": "Jul — Aug 2026",
       "details": [
-        "Designs resilient interfaces that balance clarity, warmth, and motion.",
-        "Builds accessible front-end experiences with React, TypeScript, and CSS.",
-        "Turns strategy into polished experiences that feel personal and useful."
+        "Sourced 100+ founders globally and conducted 30+ in-depth interviews to identify success patterns.",
+        "Briefed investors weekly on diligence insights for a portfolio that returned 100%+ in 9 months."
       ]
     },
     {
-      "id": "chef-specials",
-      "section": "Chef's Specials",
-      "title": "Selected Projects",
-      "company": "Portfolio highlights",
-      "date": "2020 — 2026",
+      "id": "coffin-capital",
+      "section": "Main Course II",
+      "title": "Consultant",
+      "company": "Coffin Capital",
+      "date": "Jan — May 2026",
       "details": [
-        "A story-rich portfolio that blends editorial design with product thinking.",
-        "A route-driven experience that pairs cinematic motion with practical UX.",
-        "A system of reusable components tuned for speed, clarity, and delight."
+        "Synthesized 45 interviews into a MECE framework on inefficiencies in early-career hiring.",
+        "Analyzed hiring trends, market size, and unit economics to surface pricing gaps and white space."
       ]
     },
     {
-      "id": "sides",
-      "section": "Sides",
-      "title": "Skills",
-      "company": "Craft + code",
-      "date": "Always in motion",
+      "id": "sona-candles",
+      "section": "Main Course III",
+      "title": "Co-Founder",
+      "company": "Sona Candles",
+      "date": "Aug 2025 — May 2026",
       "details": [
-        "Design systems",
-        "Brand storytelling",
-        "UX strategy",
-        "Frontend engineering",
-        "Accessibility",
-        "Art direction"
+        "Generated $4,000+ revenue from 200+ sales across 6 pop-ups; break-even within 3 weeks.",
+        "Ran 40+ user interviews to guide pricing and iteration; grew Instagram by 300+ followers."
       ]
     },
     {
-      "id": "wine-pairing",
+      "id": "chickie",
+      "section": "Main Course IV",
+      "title": "Co-Founder & CMO",
+      "company": "Chickie Company",
+      "date": "Jun 2024 — Jan 2025",
+      "details": [
+        "Led a 4-person international team launching a gamified study app.",
+        "Owned UI/UX; delivered a prototype that secured sign-ups from 2 NGOs."
+      ]
+    },
+    {
+      "id": "beta-fund",
+      "section": "Main Course V",
+      "title": "Intern",
+      "company": "Beta Fund Venture Capital · California",
+      "date": "Jun — Aug 2024",
+      "details": [
+        "Evaluated 300+ startup applications, advancing 50+ to the next stage.",
+        "Created content that lifted founder applications by 7%; co-designed an 8-week founder curriculum."
+      ]
+    },
+    {
+      "id": "peer-success-advisor",
+      "section": "Side Dish",
+      "title": "Peer Success Advisor",
+      "company": "",
+      "date": "Present",
+      "details": [
+        "Support fellow students with academic planning and the transition to college life."
+      ]
+    },
+    {
+      "id": "consulting-program",
+      "section": "Side Dish",
+      "title": "President",
+      "company": "Undergraduate Consulting Program",
+      "date": "Jun 2026 — present",
+      "details": [
+        "Onboarded 5 long-term clients from 30+ prospects and recruited the executive board.",
+        "Partnered with campus departments and alumni to launch 6 new events in one semester."
+      ]
+    },
+    {
+      "id": "content-creation",
+      "section": "Side Dish",
+      "title": "Content Creator",
+      "company": "Self-employed",
+      "date": "Oct 2025 — present",
+      "details": [
+        "Produced 15+ videos on study abroad and student life, reaching 600,000+ total views."
+      ]
+    },
+    {
+      "id": "mit-chief",
+      "section": "Side Dish",
+      "title": "Member",
+      "company": "MIT-CHIEF",
+      "date": "Oct 2025 — present",
+      "details": [
+        "Founded “Founder's Night,” convening VCs, investors, and entrepreneurs for 30+ person sessions."
+      ]
+    },
+    {
+      "id": "skills",
       "section": "Wine Pairing",
-      "title": "Tools",
-      "company": "Current stack",
-      "date": "Selected stack",
+      "title": "Tools of the Trade",
       "details": [
-        "React",
-        "TypeScript",
-        "Vite",
-        "Figma",
-        "Framer Motion",
-        "Supabase"
+        "Canva · CapCut · Cursor · Fusion 360",
+        "iMovie · Wix · Digital content creation"
       ]
     },
     {
-      "id": "dessert",
+      "id": "interests",
       "section": "Dessert",
-      "title": "Awards & Notes",
-      "company": "Recognition",
-      "date": "Selected highlights",
+      "title": "Cooking · Hiking · Product Design · Theater",
       "details": [
-        "Design awards and feature mentions",
-        "Mentorship and product critique",
-        "Thoughtful, collaborative delivery"
-      ]
-    },
-    {
-      "id": "critics",
-      "section": "Notes from the Critics",
-      "title": "Kind words",
-      "company": "Clients & collaborators",
-      "date": "From the room",
-      "details": [
-        "\"Calm, thoughtful, and uncommonly precise.\"",
-        "\"Brings wonder into practical systems.\"",
-        "\"The work feels warm, clear, and memorable.\""
+        "And yes — I really do cook for everyone."
       ]
     },
     {
       "id": "check",
       "section": "The Check",
-      "title": "Let’s make something memorable.",
-      "company": "hello@sunny-side-up.dev",
-      "date": "+1 (415) 555-0148",
+      "title": "Let's talk",
+      "company": "ywu20@babson.edu",
       "details": [
-        "Available for select collaborations and product storytelling.",
-        "Remote-friendly across time zones."
+        "linkedin.com/in/sunny-wu77"
       ]
     }
   ]

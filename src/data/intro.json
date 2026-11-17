@@ -1,0 +1,212 @@
+{
+  "_how_to_edit": "Rainy talks with the visitor in an RPG-style dialogue. 'dialogue' holds named parts of the conversation; it always starts at 'intro'. Each line has a pose (wave, surprised, sassy, dance, thinking, curtsy, walk, eat, sit, play, sleep) and text. A line can end with 'choices' (the visitor's possible replies); each choice says which part to go to next ('end' closes the dialogue). A line can also have 'goto' to jump to another part after it. 'tips' are what Rainy says when someone clicks her later; 'spots' are where she wanders (x/y = % of the painting where her feet go).",
+  "name": "Rainy",
+  "tips": [
+    {
+      "pose": "thinking",
+      "text": "Psst… have you cracked a fortune cookie yet?"
+    },
+    {
+      "pose": "dance",
+      "text": "The cocktails are the wildest page. Proof 91? Sunny really did that."
+    },
+    {
+      "pose": "surprised",
+      "text": "Fireflies! Try catching one."
+    },
+    {
+      "pose": "sassy",
+      "text": "Sign the guest book at the empty chair. Sunny reads every note."
+    },
+    {
+      "pose": "curtsy",
+      "text": "Want the serious version of Sunny? Flip the egg and read her tasting menu."
+    },
+    {
+      "pose": "wave",
+      "text": "The noodle bowl is where her story starts."
+    }
+  ],
+  "spots": {
+    "personal": [
+      {
+        "x": 24.5,
+        "y": 52,
+        "action": "eat",
+        "say": "nom nom"
+      },
+      {
+        "x": 38.5,
+        "y": 62.5,
+        "action": "eat",
+        "say": "nom"
+      },
+      {
+        "x": 54,
+        "y": 64,
+        "action": "sit"
+      },
+      {
+        "x": 66,
+        "y": 61.5,
+        "action": "play"
+      },
+      {
+        "x": 30,
+        "y": 93,
+        "action": "wave"
+      },
+      {
+        "x": 70,
+        "y": 94,
+        "action": "play"
+      },
+      {
+        "x": 48,
+        "y": 95,
+        "action": "idle"
+      },
+      {
+        "x": 82,
+        "y": 92,
+        "action": "sleep"
+      }
+    ],
+    "professional": [
+      {
+        "x": 37,
+        "y": 66,
+        "action": "sit"
+      },
+      {
+        "x": 63,
+        "y": 66,
+        "action": "idle"
+      },
+      {
+        "x": 28,
+        "y": 95,
+        "action": "wave"
+      },
+      {
+        "x": 72,
+        "y": 95,
+        "action": "idle"
+      }
+    ]
+  },
+  "dialogue": {
+    "intro": [
+      {
+        "pose": "wave",
+        "text": "Oh! A visitor! Welcome to Sunny's personal website."
+      },
+      {
+        "pose": "surprised",
+        "text": "You actually made it all the way here? Most people get lost at the front door.",
+        "choices": [
+          {
+            "label": "I'm good at finding things.",
+            "goto": "found"
+          },
+          {
+            "label": "Honestly… I'm a little lost.",
+            "goto": "lost"
+          }
+        ]
+      }
+    ],
+    "found": [
+      {
+        "pose": "sassy",
+        "text": "Ooh, confident. Sunny would like you already.",
+        "goto": "about"
+      }
+    ],
+    "lost": [
+      {
+        "pose": "curtsy",
+        "text": "Don't worry — everyone's a little lost in Wonderland. That's half the fun.",
+        "goto": "about"
+      }
+    ],
+    "about": [
+      {
+        "pose": "thinking",
+        "text": "I'm Rainy. I look after this little corner of Wonderland while Sunny is off doing something crazy."
+      },
+      {
+        "pose": "dance",
+        "text": "She says yes to anything new… and then cooks dinner for everyone afterwards."
+      },
+      {
+        "pose": "sassy",
+        "text": "So tell me — what kind of visitor are you?",
+        "choices": [
+          {
+            "label": "I'm here for the fun stuff.",
+            "goto": "fun"
+          },
+          {
+            "label": "I'm here for her résumé.",
+            "goto": "work"
+          }
+        ]
+      }
+    ],
+    "fun": [
+      {
+        "pose": "dance",
+        "text": "My favorite answer! Every dish on that table hides a piece of her story."
+      },
+      {
+        "pose": "curtsy",
+        "text": "So… are you ready to figure out something fun about her?",
+        "choices": [
+          {
+            "label": "I'm ready!",
+            "goto": "end"
+          },
+          {
+            "label": "Wait, how do I play?",
+            "goto": "help"
+          }
+        ]
+      }
+    ],
+    "work": [
+      {
+        "pose": "wave",
+        "text": "Ah, a serious one! Flip the egg in the middle of the table — her proper, daytime side has a tasting menu with her résumé."
+      },
+      {
+        "pose": "sassy",
+        "text": "But between you and me… the fun side is better. Ready to look around?",
+        "choices": [
+          {
+            "label": "Fine, show me the fun side.",
+            "goto": "end"
+          },
+          {
+            "label": "How do I play?",
+            "goto": "help"
+          }
+        ]
+      }
+    ],
+    "help": [
+      {
+        "pose": "thinking",
+        "text": "Click any dish on the table and its page opens in the recipe book."
+      },
+      {
+        "pose": "sassy",
+        "text": "The egg in the middle flips between Sunny's two worlds. Catch the treasures while you fall down the rabbit hole!"
+      },
+      {
+        "pose": "wave",
+        "text": "Your journal is at the top left — it keeps track of everything you find. Now go on, the tea's getting cold!"
+      }
+    ]
+  }
+}

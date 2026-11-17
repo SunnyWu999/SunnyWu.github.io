@@ -1,7 +1,10 @@
-import { useEffect, useMemo, useState, type CSSProperties, type MouseEvent } from 'react'
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type MouseEvent } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import hotspotData from '../../data/hotspots.json'
 import RecipeBook from './RecipeBook'
+import { discoverDish, useProgress } from '../../game/progress'
+import { dishInfo } from '../../game/dishInfo'
+import { burstAt } from '../../game/sparkle'
 
 const hotspotLabelMap: Record<string, string> = {
   egg: 'flip the egg',
@@ -27,6 +30,8 @@ function PersonalScene({ activeHash, onOpenDish, onClose, onToggleScene }: Perso
   const reducedMotion = useReducedMotion()
   const [isDebug, setIsDebug] = useState(false)
   const [pointer, setPointer] = useState({ x: 0, y: 0 })
+  const progress = useProgress()
+  const lastTrail = useRef(0)
 
   const selectedDish = useMemo(() => {
     if (!activeHash || activeHash === 'egg') return null
@@ -38,8 +43,19 @@ function PersonalScene({ activeHash, onOpenDish, onClose, onToggleScene }: Perso
     setIsDebug(params.get('debug') === '1')
   }, [])
 
+  // opening a dish for the first time is a discovery
+  useEffect(() => {
+    if (selectedDish && dishInfo[selectedDish]) discoverDish(selectedDish, dishInfo[selectedDish].name)
+  }, [selectedDish])
+
   const handlePointerMove = (event: MouseEvent<HTMLDivElement>) => {
     if (reducedMotion || window.matchMedia('(pointer: coarse)').matches) return
+    // a faint trail of stardust follows the cursor through the night
+    const now = performance.now()
+    if (now - lastTrail.current > 90) {
+      lastTrail.current = now
+      burstAt(event.clientX, event.clientY, { count: 1, spread: 28 })
+    }
     const rect = event.currentTarget.getBoundingClientRect()
     const x = (event.clientX - rect.left) / rect.width - 0.5
     const y = (event.clientY - rect.top) / rect.height - 0.5
@@ -81,24 +97,38 @@ function PersonalScene({ activeHash, onOpenDish, onClose, onToggleScene }: Perso
         <span className="ambient-candle ambient-candle--2" />
       </div>
 
-      {Object.entries(personalHotspots).map(([id, hotspot]) => (
-        <button
-          key={id}
-          type="button"
-          className={`scene-hotspot ${selectedDish === id ? 'is-selected' : ''} ${isDebug ? 'is-debug' : ''}`}
-          style={hotspotStyle(hotspot)}
-          aria-label={id === 'egg' ? 'Flip the egg' : `Open ${hotspotLabelMap[id] ?? id}`}
-          onClick={() => {
-            if (id === 'egg') {
-              onToggleScene()
-              return
-            }
-            onOpenDish(id)
-          }}
-        >
-          <span className="scene-hotspot__label">{hotspotLabelMap[id] ?? id}</span>
-        </button>
-      ))}
+      {Object.entries(personalHotspots).map(([id, hotspot]) => {
+        const info = dishInfo[id]
+        const tasted = progress.dishes.includes(id)
+        return (
+          <button
+            key={id}
+            type="button"
+            className={`scene-hotspot ${selectedDish === id ? 'is-selected' : ''} ${isDebug ? 'is-debug' : ''} ${id === 'egg' || !tasted ? 'is-beckon' : ''} ${id !== 'egg' && !tasted ? 'is-new' : ''}`}
+            style={hotspotStyle(hotspot)}
+            aria-label={id === 'egg' ? 'Flip the egg' : `Open ${hotspotLabelMap[id] ?? id}`}
+            onClick={(event) => {
+              burstAt(event.clientX, event.clientY, { count: 16, spread: 100, hue: id === 'egg' ? 'blue' : 'gold' })
+              if (id === 'egg') {
+                onToggleScene()
+                return
+              }
+              onOpenDish(id)
+            }}
+          >
+            <span className="scene-hotspot__label">{hotspotLabelMap[id] ?? id}</span>
+            <span className="scene-hotspot__card" aria-hidden="true">
+              <strong>{id === 'egg' ? 'The Egg' : info?.title}</strong>
+              <em>{id === 'egg' ? 'Flip it and float back up to daylight' : info?.blurb}</em>
+              {id !== 'egg' && info ? <span className="scene-hotspot__counts">{info.counts}</span> : null}
+              {id !== 'egg' ? (
+                <span className={`scene-hotspot__status ${tasted ? 'is-done' : ''}`}>{tasted ? '✓ tasted' : '✦ not tasted yet'}</span>
+              ) : null}
+              {info?.tag ? <span className="scene-hotspot__tag">{info.tag}</span> : null}
+            </span>
+          </button>
+        )
+      })}
 
       <AnimatePresence>
         {selectedDish ? (

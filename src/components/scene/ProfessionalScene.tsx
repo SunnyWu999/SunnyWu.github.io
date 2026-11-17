@@ -2,12 +2,18 @@ import { useEffect, useState, type CSSProperties, type MouseEvent } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import hotspotData from '../../data/hotspots.json'
 import MenuBook from './MenuBook'
+import resumeData from '../../data/resume.json'
+import { burstAt } from '../../game/sparkle'
+import '../../game/game.css'
+
+const courseCount = (resumeData.courses ?? []).length
 
 const professionalHotspots = (hotspotData as { professional: Record<string, { x: number; y: number; w: number; h: number }> }).professional
 
 function ProfessionalScene({ onToggleScene }: { onToggleScene: () => void }) {
   const reducedMotion = useReducedMotion()
   const [open, setOpen] = useState(false)
+  const [seenMenu, setSeenMenu] = useState(false)
   const [isDebug, setIsDebug] = useState(false)
   const [pointer, setPointer] = useState({ x: 0, y: 0 })
 
@@ -61,20 +67,32 @@ function ProfessionalScene({ onToggleScene }: { onToggleScene: () => void }) {
         <button
           key={id}
           type="button"
-          className={`scene-hotspot ${isDebug ? 'is-debug' : ''}`}
+          className={`scene-hotspot ${isDebug ? 'is-debug' : ''} ${id === 'egg' || !seenMenu ? 'is-beckon' : ''}`}
           style={hotspotStyle(hotspot)}
           aria-label={id === 'egg' ? 'Flip the egg' : 'Open the tasting menu'}
-          onClick={() => {
+          onClick={(event) => {
+            burstAt(event.clientX, event.clientY, { count: 16, spread: 100 })
             if (id === 'egg') {
               onToggleScene()
               return
             }
+            setSeenMenu(true)
             setOpen(true)
           }}
         >
           <span className="scene-hotspot__label">{id === 'egg' ? 'flip the egg' : 'tasting menu'}</span>
+          <span className="scene-hotspot__card" aria-hidden="true">
+            <strong>{id === 'egg' ? 'The Egg' : 'The Tasting Menu'}</strong>
+            <em>{id === 'egg' ? 'Flip it and fall down the rabbit hole' : 'My work, craft and story — served in courses'}</em>
+            <span className="scene-hotspot__counts">{id === 'egg' ? 'Wonderland awaits' : `${courseCount} courses`}</span>
+            <span className="scene-hotspot__status">{id === 'egg' ? '✦ catch the treasures on the way down' : '✦ turn the pages'}</span>
+          </span>
         </button>
       ))}
+
+      <a className="pro-download" href="/resume.pdf" download="Sunny-Wu-Resume.pdf">
+        <span aria-hidden="true">↓</span> Résumé
+      </a>
 
       <AnimatePresence>
         {open ? (

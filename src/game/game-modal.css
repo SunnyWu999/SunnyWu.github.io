@@ -1,0 +1,214 @@
+/* Shared ornate frame for the game panels */
+.gm {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: radial-gradient(ellipse at center, rgba(20, 18, 40, 0.55), rgba(4, 4, 12, 0.88));
+  backdrop-filter: blur(8px);
+  animation: gm-fade 260ms ease both;
+}
+
+@keyframes gm-fade {
+  from { opacity: 0; }
+}
+
+.gm__panel {
+  --ink: #3a2a1d;
+  --ink-soft: #6b5440;
+  --gold: #b88a3e;
+  position: relative;
+  width: min(46rem, 100%);
+  max-height: min(92vh, 56rem);
+  display: flex;
+  flex-direction: column;
+  border: 3px solid #6a4526;
+  border-radius: 1.1rem;
+  background: linear-gradient(170deg, #f6ebd0, #e6d4aa);
+  color: var(--ink);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  box-shadow: 0 0 0 2px #c9a35a, 0 0 0 5px #4a2f18, 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 60px rgba(255, 196, 110, 0.22), inset 0 0 50px rgba(150, 100, 40, 0.22);
+  animation: gm-open 520ms cubic-bezier(0.2, 0.9, 0.25, 1.15) both;
+  overflow: hidden;
+}
+
+.gm__panel--wide {
+  width: min(70rem, 100%);
+}
+
+@keyframes gm-open {
+  from { opacity: 0; transform: translateY(40px) scale(0.9) rotateX(14deg); }
+}
+
+/* gilded corner flourishes */
+.gm__panel::before,
+.gm__panel::after {
+  content: '❦';
+  position: absolute;
+  font-size: 1.5rem;
+  color: var(--gold);
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.gm__panel::before {
+  left: 0.75rem;
+  top: 0.4rem;
+}
+
+.gm__panel::after {
+  right: 0.75rem;
+  bottom: 0.4rem;
+  transform: rotate(180deg);
+}
+
+.gm__head {
+  padding: 1rem 3.2rem 0.5rem;
+  text-align: center;
+  flex: none;
+}
+
+.gm__head h2 {
+  margin: 0;
+  font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.gm__head p {
+  margin: 0.1rem 0 0;
+  font-family: 'Caveat', cursive;
+  font-size: 1.3rem;
+  color: #8a5a2b;
+}
+
+.gm__body {
+  padding: 0.5rem 1.4rem 1.4rem;
+  overflow: auto;
+  min-height: 0;
+}
+
+.gm__close {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.8rem;
+  z-index: 3;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid rgba(167, 128, 63, 0.8);
+  background: radial-gradient(circle at 35% 30%, #f7ecd6, #e4d1ad);
+  color: var(--ink);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(20, 12, 6, 0.35);
+  transition: transform 200ms ease;
+}
+
+.gm__close:hover,
+.gm__close:focus-visible {
+  transform: rotate(90deg) scale(1.08);
+}
+
+/* ───────── the dock: three round-rimmed doors into the game ───────── */
+.gd {
+  position: fixed;
+  left: 50%;
+  bottom: 1rem;
+  z-index: 28;
+  display: flex;
+  gap: 0.7rem;
+  transform: translateX(-50%);
+}
+
+.gd__btn {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 0.1rem;
+  min-width: 5.2rem;
+  padding: 0.5rem 0.8rem 0.45rem;
+  border: 1px solid rgba(232, 195, 120, 0.8);
+  border-radius: 0.9rem;
+  background: linear-gradient(160deg, rgba(50, 34, 20, 0.88), rgba(20, 14, 10, 0.88));
+  color: #fbeccb;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(255, 233, 180, 0.12);
+  transition: transform 220ms cubic-bezier(0.2, 0.9, 0.3, 1.4), box-shadow 220ms ease;
+}
+
+.gd__btn:hover,
+.gd__btn:focus-visible {
+  transform: translateY(-5px) scale(1.06);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5), 0 0 26px rgba(255, 200, 110, 0.55), inset 0 0 0 1px rgba(255, 233, 180, 0.3);
+}
+
+.gd__icon {
+  font-size: 1.55rem;
+  line-height: 1.1;
+  filter: drop-shadow(0 0 6px rgba(255, 214, 120, 0.7));
+}
+
+.gd__meta {
+  font-size: 0.72rem;
+  font-style: italic;
+  color: #ffd98c;
+}
+
+.gd__btn.is-new::after {
+  content: '✦';
+  position: absolute;
+  top: -0.55rem;
+  right: -0.25rem;
+  font-size: 1.15rem;
+  color: #ffe29a;
+  text-shadow: 0 0 10px rgba(255, 214, 120, 1);
+  animation: hotspot-twinkle 1.8s ease-in-out infinite;
+}
+
+.gd--professional .gd__btn {
+  background: linear-gradient(160deg, rgba(248, 237, 212, 0.92), rgba(228, 210, 168, 0.92));
+  color: #3a2a1d;
+  border-color: rgba(167, 128, 63, 0.9);
+}
+
+.gd--professional .gd__meta {
+  color: #8a5a2b;
+}
+
+@media (max-width: 600px) {
+  .gd {
+    gap: 0.4rem;
+    bottom: 0.6rem;
+  }
+
+  .gd__btn {
+    min-width: 0;
+    padding: 0.4rem 0.55rem 0.35rem;
+    font-size: 0.72rem;
+  }
+
+  .gm__panel {
+    border-radius: 0.8rem;
+  }
+
+  .gm__body {
+    padding: 0.4rem 0.8rem 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gm,
+  .gm__panel,
+  .gd__btn.is-new::after {
+    animation: none;
+  }
+}

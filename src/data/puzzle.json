@@ -1,0 +1,26 @@
+{
+  "_how_to_edit": "These are the photos visitors can piece together. Put your own photos in public/media/ (landscape photos work best — they are cropped to 4:3) and change \"src\" to e.g. \"/media/my-trip.jpg\". Give every photo a unique \"id\". Set \"placeholder\" to false once a photo is really yours — until then a 'placeholder photo' ribbon is shown.",
+  "photos": [
+    {
+      "id": "meadow-day",
+      "title": "The Sunlit Meadow",
+      "caption": "Before the rabbit hole — a bright, ordinary afternoon.",
+      "src": "/images/scene/optimized/bg-professional-day.webp",
+      "placeholder": true
+    },
+    {
+      "id": "meadow-night",
+      "title": "The Moonlit Meadow",
+      "caption": "The same meadow, once the stars come out.",
+      "src": "/images/scene/optimized/bg-personal-night.webp",
+      "placeholder": true
+    },
+    {
+      "id": "wonderland-table",
+      "title": "The Wonderland Table",
+      "caption": "Every dish tells a story.",
+      "src": "/images/scene/scene-personal.webp",
+      "placeholder": true
+    }
+  ]
+}

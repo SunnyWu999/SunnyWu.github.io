@@ -1,7 +1,13 @@
-import { useCallback, useEffect, useState, type FormEvent, type TouchEvent } from 'react'
+import { useCallback, useEffect, useState, type FormEvent, type ReactNode, type TouchEvent } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import bookData from '../../data/recipe-book.json'
 import { commentsService, type CommentRecord } from '../../services/commentsService'
+import type { StoryBlock } from '../../types'
+import { StoryPage } from './StoryBlocks'
+import { FlipLeaf } from './PageFlip'
+import { useBookTilt } from './useBookTilt'
+import { FLIP_MS, flipBase, type Flip } from './pageFlipState'
+import { paginateStory, usableBlocks, type StoryPageSlots } from './storyPagination'
 import './menu-book.css'
 import './recipe-book.css'
 
@@ -19,6 +25,18 @@ type Entry = {
   notes?: string
   photo?: string
   video?: string
+  story?: StoryBlock[]
+}
+
+type Spread = { entryIndex: number; blocks: StoryPageSlots | null; page: number; pages: number }
+
+/** Every entry is a recipe spread, followed by one extra spread per page of its story. */
+function buildSpreads(chapter: Chapter): Spread[] {
+  return chapter.entries.flatMap((entry, entryIndex) => {
+    const recipe: Spread = { entryIndex, blocks: null, page: 0, pages: 0 }
+    const pages = paginateStory(usableBlocks(entry.story))
+    return [recipe, ...pages.map((blocks, page) => ({ entryIndex, blocks, page, pages: pages.length }))]
+  })
 }
 
 type Chapter = {
@@ -33,6 +51,12 @@ type Chapter = {
 
 const chapters = (bookData as unknown as { chapters: Chapter[] }).chapters
 const ribbonColors = ['#8e2b2b', '#b07a2a', '#3f6b5a', '#5a4a86', '#a24d6e', '#2f5d7c', '#6d5a3a']
+
+const spreadsByChapter = chapters.map(buildSpreads)
+const indexOfChapter = (id: string) => Math.max(0, chapters.findIndex((chapter) => chapter.id === id))
+
+/** Where the book is open: a chapter and one of its spreads. */
+type Pos = { c: number; s: number }
 
 const clean = (value?: string) => (value && !value.includes('[PLACEHOLDER]') ? value.trim() : '')
 
@@ -132,21 +156,32 @@ type Props = { chapterId: string; onChapter: (id: string) => void; onClose: () =
 
 function RecipeBook({ chapterId, onChapter, onClose }: Props) {
   const reducedMotion = useReducedMotion()
-  const chapterIndex = Math.max(0, chapters.findIndex((chapter) => chapter.id === chapterId))
-  const chapter = chapters[chapterIndex]
-  const [entryIndex, setEntryIndex] = useState(0)
-  const [direction, setDirection] = useState(1)
+  const tilt = useBookTilt(!reducedMotion)
+  const [pos, setPos] = useState<Pos>({ c: indexOfChapter(chapterId), s: 0 })
+  const [flip, setFlip] = useState<Flip<Pos> | null>(null)
+  const [seenId, setSeenId] = useState(chapterId)
+  const [landing, setLanding] = useState<number | null>(null) // page to land on after going back a chapter
   const [mobileSide, setMobileSide] = useState<'left' | 'right'>('left')
   const [touchX, setTouchX] = useState<number | null>(null)
   const [media, setMedia] = useState<{ type: 'photo' | 'video'; src: string } | null>(null)
 
-  useEffect(() => {
-    setEntryIndex(0)
-    setMobileSide('left')
-  }, [chapterId])
-
-  const entry: Entry = chapter.entries[Math.min(entryIndex, chapter.entries.length - 1)] ?? {}
   const isPhone = () => window.matchMedia('(max-width: 767px)').matches
+
+  // The URL asked for another chapter (a ribbon, or next/previous across a chapter edge): turn the page to it.
+  if (chapterId !== seenId) {
+    setSeenId(chapterId)
+    const target: Pos = { c: indexOfChapter(chapterId), s: landing ?? 0 }
+    setLanding(null)
+    if (target.c !== pos.c) {
+      if (reducedMotion || isPhone() || flip) {
+        setFlip(null)
+        setPos(target)
+        setMobileSide('left')
+      } else {
+        setFlip({ dir: target.c > pos.c ? 1 : -1, from: pos, to: target })
+      }
+    }
+  }
 
   const turn = useCallback(
     (step: number) => {
@@ -154,19 +189,25 @@ function RecipeBook({ chapterId, onChapter, onClose }: Props) {
         if (step > 0 && mobileSide === 'left') return setMobileSide('right')
         if (step < 0 && mobileSide === 'right') return setMobileSide('left')
       }
-      setDirection(step)
-      const next = entryIndex + step
-      if (next >= 0 && next < chapter.entries.length) {
-        setEntryIndex(next)
-        if (isPhone()) setMobileSide(step > 0 ? 'left' : 'right')
+      if (flip) return
+      const next = pos.s + step
+      if (next >= 0 && next < spreadsByChapter[pos.c].length) {
+        if (isPhone() || reducedMotion) {
+          setPos({ c: pos.c, s: next })
+          if (isPhone()) setMobileSide(step > 0 ? 'left' : 'right')
+          return
+        }
+        setFlip({ dir: step > 0 ? 1 : -1, from: pos, to: { c: pos.c, s: next } })
         return
       }
-      const nextChapter = chapters[chapterIndex + step]
+      const nextChapter = chapters[pos.c + step]
       if (nextChapter) {
+        // going back lands on the last page of the previous chapter
+        if (step < 0) setLanding(spreadsByChapter[pos.c + step].length - 1)
         onChapter(nextChapter.id)
       }
     },
-    [chapter.entries.length, chapterIndex, entryIndex, mobileSide, onChapter],
+    [flip, mobileSide, onChapter, pos, reducedMotion],
   )
 
   useEffect(() => {
@@ -190,9 +231,87 @@ function RecipeBook({ chapterId, onChapter, onClose }: Props) {
     setTouchX(null)
   }
 
-  const ingredients = (entry.ingredients ?? []).map((item) => clean(item)).filter(Boolean)
-  const isFirst = chapterIndex === 0 && entryIndex === 0 && mobileSide === 'left'
-  const isLast = chapterIndex === chapters.length - 1 && entryIndex === chapter.entries.length - 1 && mobileSide === 'right'
+  const base = flipBase(flip, pos)
+  const shown = chapters[pos.c]
+
+  /** One page of any spread of any chapter — used for the book itself and for both faces of the turning leaf. */
+  const pageFor = (position: Pos, side: 'left' | 'right', still = false): ReactNode => {
+    const chapter = chapters[position.c]
+    const spreads = spreadsByChapter[position.c]
+    const spread = spreads[Math.min(position.s, spreads.length - 1)]
+    const entryIndex = spread.entryIndex
+    const entry: Entry = chapter.entries[entryIndex] ?? {}
+    const ingredients = (entry.ingredients ?? []).map((item) => clean(item)).filter(Boolean)
+    const key = `${position.c}-${position.s}`
+
+    if (side === 'left') {
+      return (
+        <div key={`l${key}`} className="mb-page mb-page--left">
+          <div className="mb-slot mb-slot--1 rb-chapter">
+            <div className="mb-slot__content">
+              <p className="mb-cover-title__sub">{chapter.title}</p>
+              {clean(chapter.subtitle) ? <p className="rb-subtitle">{chapter.subtitle}</p> : null}
+            </div>
+          </div>
+          <div className="rb-illustration">
+            <img src={`/images/scene/optimized/${chapter.image}.webp`} alt="" />
+          </div>
+          <div className="mb-slot mb-slot--3">
+            <div className="mb-slot__content">
+              {chapter.kind === 'fortune' ? <p className="mb-section">Fortune {entryIndex + 1}</p> : null}
+              {chapter.kind !== 'fortune' && clean(entry.name) ? <h3 className="mb-title rb-name">{clean(entry.name)}</h3> : null}
+              {chapter.kind !== 'fortune' && clean(entry.served) ? <p className="mb-meta">{clean(entry.served)}</p> : null}
+              {clean(entry.tag) ? <p className="rb-tag">{clean(entry.tag)}</p> : null}
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    return (
+      <div key={`r${key}`} className="mb-page mb-page--right">
+        {chapter.kind === 'fortune' ? <Fortune key={entryIndex} entry={entry} /> : null}
+        {chapter.kind === 'guestbook' ? <GuestBook /> : null}
+        {!chapter.kind && spread.blocks ? (
+          <StoryPage key={key} slots={spread.blocks} onOpen={setMedia} still={still} lead={flip && !flip.done ? FLIP_MS * 0.6 : 0} />
+        ) : null}
+        {!chapter.kind && !spread.blocks ? (
+          <>
+            <div className="mb-slot mb-slot--1">
+              <div className="mb-slot__content">
+                <p className="mb-section">Ingredients</p>
+                <ul className="rb-ingredients">
+                  {ingredients.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="mb-slot mb-slot--2">
+              <div className="mb-slot__content">
+                <p className="mb-section">Method</p>
+                <p className="rb-method">{clean(entry.method)}</p>
+              </div>
+            </div>
+            <div className="mb-slot mb-slot--3">
+              <div className="mb-slot__content">
+                {clean(entry.notes) ? (
+                  <>
+                    <p className="mb-section">Tasting notes</p>
+                    <p className="rb-notes">{clean(entry.notes)}</p>
+                  </>
+                ) : null}
+                <Media entry={entry} onOpen={setMedia} />
+              </div>
+            </div>
+          </>
+        ) : null}
+      </div>
+    )
+  }
+
+  const isFirst = pos.c === 0 && pos.s === 0 && mobileSide === 'left'
+  const isLast = pos.c === chapters.length - 1 && pos.s === spreadsByChapter[pos.c].length - 1 && mobileSide === 'right'
 
   return (
     <motion.div
@@ -204,6 +323,8 @@ function RecipeBook({ chapterId, onChapter, onClose }: Props) {
       onClick={(event) => event.stopPropagation()}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
+      onPointerMove={tilt.onPointerMove}
+      onPointerLeave={tilt.onPointerLeave}
     >
       <div className="rb-dust" aria-hidden="true">
         {Array.from({ length: 14 }).map((_, index) => (
@@ -212,15 +333,15 @@ function RecipeBook({ chapterId, onChapter, onClose }: Props) {
       </div>
 
       <div className="mb-clip">
-        <div className="mb-book rb-book" role="dialog" aria-label={chapter.title}>
+        <div className="mb-book rb-book" role="dialog" aria-label={shown.title}>
           <div className="rb-ribbons" role="tablist" aria-label="Chapters">
             {chapters.map((item, index) => (
               <button
                 key={item.id}
                 type="button"
                 role="tab"
-                aria-selected={item.id === chapter.id}
-                className={`rb-ribbon ${item.id === chapter.id ? 'is-active' : ''}`}
+                aria-selected={item.id === chapterId}
+                className={`rb-ribbon ${item.id === chapterId ? 'is-active' : ''}`}
                 style={{ ['--ribbon' as string]: ribbonColors[index % ribbonColors.length], ['--n' as string]: index }}
                 onClick={() => onChapter(item.id)}
               >
@@ -229,78 +350,28 @@ function RecipeBook({ chapterId, onChapter, onClose }: Props) {
             ))}
           </div>
 
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`${chapter.id}-${entryIndex}`}
-              className="mb-spread"
-              initial={reducedMotion ? { opacity: 0 } : { opacity: 0, x: direction * 20, filter: 'blur(4px)' }}
-              animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-              exit={reducedMotion ? { opacity: 0 } : { opacity: 0, x: direction * -20, filter: 'blur(4px)' }}
-              transition={{ duration: 0.4, ease: 'easeOut' }}
-            >
-              {/* Left page: chapter, illustration, dish name */}
-              <div className="mb-page mb-page--left">
-                <div className="mb-slot mb-slot--1 rb-chapter">
-                  <div className="mb-slot__content">
-                    <p className="mb-cover-title__sub">{chapter.title}</p>
-                    {clean(chapter.subtitle) ? <p className="rb-subtitle">{chapter.subtitle}</p> : null}
-                  </div>
-                </div>
-                <div className="rb-illustration">
-                  <img src={`/images/scene/optimized/${chapter.image}.webp`} alt="" />
-                </div>
-                <div className="mb-slot mb-slot--3">
-                  <div className="mb-slot__content">
-                    {chapter.kind === 'fortune' ? <p className="mb-section">Fortune {entryIndex + 1}</p> : null}
-                    {chapter.kind !== 'fortune' && clean(entry.name) ? <h3 className="mb-title rb-name">{clean(entry.name)}</h3> : null}
-                    {chapter.kind !== 'fortune' && clean(entry.served) ? <p className="mb-meta">{clean(entry.served)}</p> : null}
-                    {clean(entry.tag) ? <p className="rb-tag">{clean(entry.tag)}</p> : null}
-                  </div>
-                </div>
-              </div>
+          <div className="pf-stage">
+            <div className="mb-spread">
+              {pageFor(base.left, 'left')}
+              {pageFor(base.right, 'right')}
+            </div>
+            {flip ? (
+              <FlipLeaf
+                flip={flip}
+                renderPage={(position, side) => pageFor(position, side, true)}
+                onDone={() => {
+                  // swap the book underneath first, then lift the leaf once that has painted
+                  setPos(flip.to)
+                  setFlip({ ...flip, done: true })
+                  window.setTimeout(() => setFlip(null), 90)
+                }}
+              />
+            ) : null}
+          </div>
 
-              {/* Right page: the recipe */}
-              <div className="mb-page mb-page--right">
-                {chapter.kind === 'fortune' ? <Fortune key={entryIndex} entry={entry} /> : null}
-                {chapter.kind === 'guestbook' ? <GuestBook /> : null}
-                {!chapter.kind ? (
-                  <>
-                    <div className="mb-slot mb-slot--1">
-                      <div className="mb-slot__content">
-                        <p className="mb-section">Ingredients</p>
-                        <ul className="rb-ingredients">
-                          {ingredients.map((item) => (
-                            <li key={item}>{item}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                    <div className="mb-slot mb-slot--2">
-                      <div className="mb-slot__content">
-                        <p className="mb-section">Method</p>
-                        <p className="rb-method">{clean(entry.method)}</p>
-                      </div>
-                    </div>
-                    <div className="mb-slot mb-slot--3">
-                      <div className="mb-slot__content">
-                        {clean(entry.notes) ? (
-                          <>
-                            <p className="mb-section">Tasting notes</p>
-                            <p className="rb-notes">{clean(entry.notes)}</p>
-                          </>
-                        ) : null}
-                        <Media entry={entry} onOpen={setMedia} />
-                      </div>
-                    </div>
-                  </>
-                ) : null}
-              </div>
-            </motion.div>
-          </AnimatePresence>
-
-          <p className="mb-folio mb-folio--left">{chapter.ribbon}</p>
+          <p className="mb-folio mb-folio--left">{chapters[base.left.c].ribbon}</p>
           <p className="mb-folio mb-folio--right">
-            {entryIndex + 1} / {chapter.entries.length}
+            {base.right.s + 1} / {spreadsByChapter[base.right.c].length}
           </p>
         </div>
       </div>
