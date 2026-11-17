@@ -11,11 +11,11 @@ import storyData from '../data/my-story.json'
 export const DISH_IDS = ['cake', 'cocktails', 'travel-board', 'comfort', 'macarons', 'fortune-cookies', 'seat'] as const
 
 export const TREASURES = [
-  { id: 'pocket-watch', name: 'Pocket Watch', note: '“I’m late, I’m late!”', image: '/images/scene/transition/pocket-watch.webp' },
-  { id: 'teacup', name: 'Mismatched Teacup', note: 'It is always tea-time.', image: '/images/scene/transition/teacup.webp' },
-  { id: 'golden-key', name: 'Golden Key', note: 'It opens a very small door.', image: '/images/scene/transition/golden-key.webp' },
-  { id: 'playing-card', name: 'Playing Card', note: 'Off with their heads!', image: '/images/scene/transition/playing-card.webp' },
-  { id: 'drink-me-bottle', name: '“Drink Me” Bottle', note: 'Curiouser and curiouser…', image: '/images/scene/transition/drink-me-bottle.webp' },
+  { id: 'pocket-watch', name: 'Pocket Watch', note: '“I’m late, I’m late!”', image: 'images/scene/transition/pocket-watch.webp' },
+  { id: 'teacup', name: 'Mismatched Teacup', note: 'It is always tea-time.', image: 'images/scene/transition/teacup.webp' },
+  { id: 'golden-key', name: 'Golden Key', note: 'It opens a very small door.', image: 'images/scene/transition/golden-key.webp' },
+  { id: 'playing-card', name: 'Playing Card', note: 'Off with their heads!', image: 'images/scene/transition/playing-card.webp' },
+  { id: 'drink-me-bottle', name: '“Drink Me” Bottle', note: 'Curiouser and curiouser…', image: 'images/scene/transition/drink-me-bottle.webp' },
 ] as const
 
 export const PUZZLE_IDS: string[] = puzzleData.photos.map((photo) => photo.id)

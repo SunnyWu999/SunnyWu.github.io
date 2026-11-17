@@ -254,7 +254,7 @@ function RecipeBook({ chapterId, onChapter, onClose }: Props) {
             </div>
           </div>
           <div className="rb-illustration">
-            <img src={`/images/scene/optimized/${chapter.image}.webp`} alt="" />
+            <img src={`images/scene/optimized/${chapter.image}.webp`} alt="" />
           </div>
           <div className="mb-slot mb-slot--3">
             <div className="mb-slot__content">

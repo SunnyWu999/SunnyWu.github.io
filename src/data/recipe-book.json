@@ -1,5 +1,5 @@
 {
-  "_how_to_edit": "Every chapter is one dish on the table. Every entry is one spread (two pages) of the book. Change the words between the quotes. Fields you can use in any entry: name, served, tag, ingredients (a list), method, notes, photo, video. For photo/video, put the file in public/media/ and write it like \"/media/my-photo.jpg\" or \"/media/my-clip.mp4\". Leave a field as \"\" to hide it. Keep method to about 3 sentences so it fits the page. Stories: add a \"story\" list to any entry. Each block is one of {\"type\":\"text\",\"content\"}, {\"type\":\"image\",\"src\",\"caption\"}, {\"type\":\"video\",\"src\",\"poster\",\"caption\"}, {\"type\":\"quote\",\"content\"}. Long stories continue onto the next page automatically; blocks containing [PLACEHOLDER] stay hidden.",
+  "_how_to_edit": "Every chapter is one dish on the table. Every entry is one spread (two pages) of the book. Change the words between the quotes. Fields you can use in any entry: name, served, tag, ingredients (a list), method, notes, photo, video. For photo/video, put the file in public/media/ and write it like \"media/my-photo.jpg\" or \"media/my-clip.mp4\". Leave a field as \"\" to hide it. Keep method to about 3 sentences so it fits the page. Stories: add a \"story\" list to any entry. Each block is one of {\"type\":\"text\",\"content\"}, {\"type\":\"image\",\"src\",\"caption\"}, {\"type\":\"video\",\"src\",\"poster\",\"caption\"}, {\"type\":\"quote\",\"content\"}. Long stories continue onto the next page automatically; blocks containing [PLACEHOLDER] stay hidden.",
   "chapters": [
     {
       "id": "cocktails",
@@ -33,7 +33,7 @@
             },
             {
               "type": "image",
-              "src": "/media/wonderland-photo.svg",
+              "src": "media/wonderland-photo.svg",
               "caption": "Somewhere above the clouds, moonlit and quiet."
             },
             {
@@ -42,8 +42,8 @@
             },
             {
               "type": "video",
-              "src": "/media/fall-720p.mp4",
-              "poster": "/media/looking-glass-poster.svg",
+              "src": "media/fall-720p.mp4",
+              "poster": "media/looking-glass-poster.svg",
               "caption": "The fall, seen through the looking-glass."
             }
           ]
@@ -68,7 +68,7 @@
             },
             {
               "type": "image",
-              "src": "/media/wonderland-photo.svg",
+              "src": "media/wonderland-photo.svg",
               "caption": "A frozen lake under a drifting moon."
             },
             {

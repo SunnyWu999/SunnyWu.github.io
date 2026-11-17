@@ -69,7 +69,7 @@ export function SectionPanel({ title, isOpen, onClose, sharedImage, sharedOrigin
               className="section-panel__shared-art"
               aria-hidden="true"
               style={{
-                backgroundImage: `url('/images/scene/${sharedImage}.png')`,
+                backgroundImage: `url('images/scene/${sharedImage}.png')`,
                 backgroundSize: 'contain',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',

@@ -44,7 +44,7 @@ function Pose({ pose, className }: { pose: string; className: string }) {
   return (
     <img
       className={className}
-      src={`/images/guide/${src}.webp`}
+      src={`images/guide/${src}.webp`}
       alt=""
       draggable={false}
       onError={() => {
@@ -329,7 +329,7 @@ export default function Guide({ scene }: { scene: Scene }) {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.35, ease: 'easeOut' }}
                 >
-                  <Portrait src={`/images/guide/${line.pose}.webp`} />
+                  <Portrait src={`images/guide/${line.pose}.webp`} />
                 </motion.div>
               </AnimatePresence>
             </motion.div>

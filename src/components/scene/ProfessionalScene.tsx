@@ -90,7 +90,7 @@ function ProfessionalScene({ onToggleScene }: { onToggleScene: () => void }) {
         </button>
       ))}
 
-      <a className="pro-download" href="/resume.pdf" download="Sunny-Wu-Resume.pdf">
+      <a className="pro-download" href="resume.pdf" download="Sunny-Wu-Resume.pdf">
         <span aria-hidden="true">↓</span> Résumé
       </a>
 

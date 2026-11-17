@@ -44,7 +44,7 @@ export const dishInfo: Record<string, DishInfo> = Object.fromEntries(
       title: chapter.title,
       blurb: clean(chapter.subtitle),
       counts: countsFor(chapter),
-      image: `/images/scene/optimized/${chapter.image}.webp`,
+      image: `images/scene/optimized/${chapter.image}.webp`,
       tag: tags[chapter.id],
     },
   ]),

@@ -12,7 +12,7 @@
       "story": [
         { "type": "text", "content": "Every story starts somewhere small — a hole under a tree, a door too tiny to fit through, a question that will not go away." },
         { "type": "quote", "content": "“Begin at the beginning, and go on till you come to the end: then stop.”" },
-        { "type": "image", "src": "/media/wonderland-photo.svg", "caption": "A first photograph goes here." },
+        { "type": "image", "src": "media/wonderland-photo.svg", "caption": "A first photograph goes here." },
         { "type": "text", "content": "Write the opening of your own story in this chapter: where you started, and what you were curious about." }
       ]
     },
@@ -24,7 +24,7 @@
       "placeholder": true,
       "story": [
         { "type": "text", "content": "And then the ground is gone. Down, down, down — past shelves of books and lamps and jars, with plenty of time to wonder what comes next." },
-        { "type": "video", "src": "/media/fall-720p.mp4", "poster": "/media/looking-glass-poster.svg", "caption": "A short video from this chapter can play here." },
+        { "type": "video", "src": "media/fall-720p.mp4", "poster": "media/looking-glass-poster.svg", "caption": "A short video from this chapter can play here." },
         { "type": "text", "content": "Use this chapter for the big leap — the move, the job, the risk that changed your direction." }
       ]
     },
@@ -36,7 +36,7 @@
       "placeholder": true,
       "story": [
         { "type": "text", "content": "Nothing makes sense at a tea party, and that is exactly the charm of it. The best people are the ones who pour you a cup and ask the wrong, wonderful questions." },
-        { "type": "image", "src": "/media/wonderland-photo.svg", "caption": "Friends, teammates, mentors — put their photo here." },
+        { "type": "image", "src": "media/wonderland-photo.svg", "caption": "Friends, teammates, mentors — put their photo here." },
         { "type": "quote", "content": "“Why, sometimes I’ve believed as many as six impossible things before breakfast.”" }
       ]
     },

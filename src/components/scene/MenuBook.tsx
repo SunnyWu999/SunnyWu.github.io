@@ -58,7 +58,7 @@ function CourseBlock({ course }: { course: Course }) {
         </p>
       ))}
       {course.id === 'check' ? (
-        <a className="mb-seal" href="/resume.pdf" download="Sunny-Wu-Resume.pdf">
+        <a className="mb-seal" href="resume.pdf" download="Sunny-Wu-Resume.pdf">
           Request the check
         </a>
       ) : null}
@@ -79,7 +79,7 @@ function Page({ slots, side }: { slots: Slot[]; side: 'left' | 'right' }) {
           ) : null}
           {slot.kind === 'title' ? (
             <div className="mb-cover-title">
-              <img className="mb-rabbit" src="/images/scene/menu-rabbit.png" alt="" draggable={false} />
+              <img className="mb-rabbit" src="images/scene/menu-rabbit.png" alt="" draggable={false} />
               <p className="mb-cover-title__main">{clean(resumeData.title) || 'Sunny Side Up'}</p>
               <p className="mb-cover-title__sub">{clean(resumeData.subtitle) || 'Tasting Menu'}</p>
             </div>
@@ -196,7 +196,7 @@ function MenuBook({ onClose }: { onClose: () => void }) {
         <button type="button" className="mb-turn mb-turn--next" onClick={() => turn(1)} disabled={isLast} aria-label="Next page">
           <span>next</span> ›
         </button>
-        <a className="mb-download" href="/resume.pdf" download="Sunny-Wu-Resume.pdf" onClick={(event) => event.stopPropagation()}>
+        <a className="mb-download" href="resume.pdf" download="Sunny-Wu-Resume.pdf" onClick={(event) => event.stopPropagation()}>
         ↓ Download résumé (PDF)
       </a>
       <button type="button" className="mb-close" onClick={onClose} aria-label="Close the menu">

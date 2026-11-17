@@ -9,8 +9,8 @@
     "story": [
       { "type": "text", "content": "The first sip is cold as a moonbeam and warm as a story told in the dark. It tastes like sugar, bells, and the tiny thrill of stepping where the rules do not quite apply." },
       { "type": "quote", "content": "“Begin at the beginning,” the hourglass murmured, “and go on until you come to the end; then stop.”" },
-      { "type": "image", "src": "/media/wonderland-photo.svg", "caption": "Moonlit glass and silver stars." },
-      { "type": "video", "src": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4", "poster": "/media/looking-glass-poster.svg", "caption": "The drink glitters like a pocket mirror under lantern light." }
+      { "type": "image", "src": "media/wonderland-photo.svg", "caption": "Moonlit glass and silver stars." },
+      { "type": "video", "src": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4", "poster": "media/looking-glass-poster.svg", "caption": "The drink glitters like a pocket mirror under lantern light." }
     ],
     "images": ["[PLACEHOLDER]", "[PLACEHOLDER]"]
   },
@@ -23,7 +23,7 @@
     "proof": 64,
     "story": [
       { "type": "text", "content": "This one spins the room a little sideways. It is bright and insistent, with the weight of a card game played after midnight." },
-      { "type": "image", "src": "/media/wonderland-photo.svg", "caption": "A drifting tea-tray under the moon." },
+      { "type": "image", "src": "media/wonderland-photo.svg", "caption": "A drifting tea-tray under the moon." },
       { "type": "quote", "content": "“It’s no use going back to yesterday,” said Alice, “because I was a different person then.”" }
     ],
     "images": ["[PLACEHOLDER]", "[PLACEHOLDER]"]
@@ -37,7 +37,7 @@
     "proof": 91,
     "story": [
       { "type": "text", "content": "The color of a rose in candlelight and the bite of a good dare. It leaves a little warmth behind the teeth and a little wonder in the shoulders." },
-      { "type": "video", "src": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4", "poster": "/media/looking-glass-poster.svg", "caption": "A reflection inside the looking-glass." },
+      { "type": "video", "src": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4", "poster": "media/looking-glass-poster.svg", "caption": "A reflection inside the looking-glass." },
       { "type": "quote", "content": "“The question is,” said Alice, “whether you can make words mean so many different things.”" }
     ],
     "images": ["[PLACEHOLDER]", "[PLACEHOLDER]"]
@@ -51,9 +51,9 @@
     "proof": 73,
     "story": [
       { "type": "text", "content": "A bittersweet little spell with the hush of a dusty attic and the sparkle of a sudden clue. It feels like standing in a doorway while the world tilts just a fraction." },
-      { "type": "image", "src": "/media/wonderland-photo.svg", "caption": "The last candle burns under the snow-lost mountain." },
+      { "type": "image", "src": "media/wonderland-photo.svg", "caption": "The last candle burns under the snow-lost mountain." },
       { "type": "quote", "content": "“A little room with a table and a tea-tray in it.”" },
-      { "type": "video", "src": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4", "poster": "/media/looking-glass-poster.svg", "caption": "The glass hums like a song in the dark." }
+      { "type": "video", "src": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4", "poster": "media/looking-glass-poster.svg", "caption": "The glass hums like a song in the dark." }
     ],
     "images": ["[PLACEHOLDER]", "[PLACEHOLDER]"]
   }

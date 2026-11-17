@@ -19,8 +19,8 @@ const TOTAL_MS = 4000
 const SWAP_MS = 1500 // route changes here, hidden behind the tunnel
 
 const scenes = {
-  professional: '/images/scene/scene-professional.webp',
-  personal: '/images/scene/scene-personal.webp',
+  professional: 'images/scene/scene-professional.webp',
+  personal: 'images/scene/scene-personal.webp',
 }
 
 // Photos come from the data file: a real photo if one has been added, otherwise the dish illustration.
@@ -28,7 +28,7 @@ const photoSources = (bookData as { chapters: { image: string; entries: { photo?
   .slice(0, 4)
   .map((chapter) => {
     const real = chapter.entries.map((entry) => entry.photo).find((photo) => photo && !photo.includes('[PLACEHOLDER]'))
-    return real || `/images/scene/optimized/${chapter.image}.webp`
+    return real || `images/scene/optimized/${chapter.image}.webp`
   })
 
 type Floater = { key: string; x: number; size: number; delay: number; dur: number; spin: number; depth: 0 | 1 | 2; treasure?: (typeof TREASURES)[number]; photo?: string }
@@ -91,7 +91,7 @@ function FallTransition({ direction, onSwap, onDone }: Props) {
       <div className="ft__scene ft__scene--start" style={{ backgroundImage: `url(${from})` }} />
 
       <div className="ft__tunnel" aria-hidden="true">
-        <img className="ft__tunnel-img" src="/images/scene/transition/rabbit-hole.webp" alt="" />
+        <img className="ft__tunnel-img" src="images/scene/transition/rabbit-hole.webp" alt="" />
       </div>
       <div className="ft__tint" aria-hidden="true" />
 
